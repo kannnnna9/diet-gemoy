@@ -1,0 +1,512 @@
+{
+  "meta": {
+    "versi": "1.0.0-draft",
+    "tanggalUpdate": "2026-07-23",
+    "sumber": "6 PDF di kerangka/ (PROGRAM/JADWAL/LEMBAR × PRIA/WANITA), Versi 2.0 REVISI 2",
+    "catatanProvenance": {
+      "dariDokumen": "cue, rep, set, beban, durasi, kalori, protein, fase, checkpoint, aturan haid/lutut, jadwal mingguan, slot makan, rotasi contoh, tracking, progresi, cadangan, red flag, starter — verbatim/parafrase dari 6 PDF.",
+      "ditulisCC": "field 'langkah' tiap gerakan = deskripsi bentuk gerakan standar yang ditulis CC (BUKAN kutipan PDF; PDF hanya memuat nama + cue keamanan). Verifikasi ringan disarankan.",
+      "turunanCC": "aturanMakan[].menuMingguan = menu 7 hari konkret yang DISUSUN CC dari bahan yang disebut PDF (bukan menu fix di dokumen). Tandai _sumber: 'turunan-cc'."
+    }
+  },
+
+  "profil": [
+    {
+      "id": "paypey",
+      "namaDefault": "paypey",
+      "jenis": "pria",
+      "aksenIdentitas": "#2F6F6A",
+      "baseline": { "usia": 25, "tb": 162, "bbAwal": 61, "bbTarget": 58, "palangAman": null },
+      "kalori": { "min": 1700, "max": 1900, "mulai": 1800, "lantai": null },
+      "protein": { "min": 110, "max": 130 },
+      "karbo": { "min": 160, "max": 200 },
+      "lemak": { "min": 45, "max": 60 },
+      "air": "2–2,5 L + kopi 300 ml (gula minimal)",
+      "bmrPerkiraan": 1500,
+      "tdeePerkiraan": "2.200–2.350 kkal",
+      "lajuBB": "~0,4–0,6 kg/bulan (defisit ringan anti-rebound)",
+      "polaMakan": { "tipe": "ganjel-pagi", "window": null, "catatan": "Ganjel pre-kerja WAJIB sebelum ~04.50, termasuk hari Minggu kerja." },
+      "fokus": ["perut lebih rata", "jaga lutut kiri"],
+      "kondisi": { "lutut": true, "haid": false },
+      "periode": { "mulai": "2026-08-01", "selesai": "2027-01-31" },
+      "kerja": { "hari": ["minggu", "senin", "selasa", "rabu", "kamis", "jumat"], "libur": ["sabtu"], "catatan": "Kerja berdiri + angkat 2–4 kg, bangun 03.30–03.50, pulang ≥16.00. Minggu = hari kerja (bukan weekend off)." },
+      "catatanJujur": "Dengan defisit ringan 6 bulan, target realistis = perut jauh lebih rata + kencang. Six pack tajam butuh lemak tubuh sangat rendah — bisa jadi fase setelah 58 kg stabil."
+    },
+    {
+      "id": "ffazeyall",
+      "namaDefault": "ffazeyall",
+      "jenis": "wanita",
+      "aksenIdentitas": "#A63D63",
+      "baseline": {
+        "usia": 25, "tb": 157, "bbAwal": 70, "bbTarget": 57, "palangAman": 60,
+        "ukuranAwal": { "lengan": 35, "pinggang": 85, "badan": 92, "paha": 67, "pinggul": 108 }
+      },
+      "kalori": { "min": 1400, "max": 1550, "mulai": 1500, "lantai": 1300 },
+      "protein": { "min": 110, "max": 130 },
+      "karbo": { "min": 120, "max": 160 },
+      "lemak": { "min": 40, "max": 55 },
+      "air": "2–2,5 L + teh hijau tawar OK",
+      "bmrPerkiraan": 1395,
+      "tdeePerkiraan": "2.000–2.100 kkal",
+      "lajuBB": "0,4–0,7 kg/minggu (agresif-terukur, bukan crash)",
+      "polaMakan": { "tipe": "IF", "window": "11.00–19.00", "catatan": "Jalan pagi puasa (06.00) boleh + air/teh. Lantai aman ≥1.300 kkal." },
+      "fokus": ["paha", "lengan", "perut", "double chin"],
+      "kondisi": { "lutut": false, "haid": true },
+      "alat": ["matras", "DB 1 kg", "KB 4 kg", "resistance band", "botol air", "bodyweight"],
+      "periode": { "mulai": "2026-07-16", "selesai": "2027-01-01" },
+      "kerja": { "hari": ["minggu", "senin", "selasa", "rabu", "kamis", "jumat"], "libur": ["sabtu"], "catatan": "Duduk 08.00–16.00 ruangan AC (NEAT rendah), bangun ~05.00, tidur 22.00–23.00. 6 hari duduk → jalan pagi tiap hari kerja krusial." },
+      "catatanJujur": "13 kg dalam ~24 minggu ≈ 0,5–0,6 kg/minggu. Urutan: 70 → 63 → 60 → 58 → 57. Sukses utama = 60 kg + cm turun + badan kencang; 57 = bonus jika energi/haid/kepatuhan aman. Double chin ikut lemak total + postur. Jangan <1.300 kkal. 1 hari jelek ≠ restart dari nol."
+    }
+  ],
+
+  "fase": [
+    { "id": "paypey-f1", "profilId": "paypey", "nama": "Fase 1 — Adaptasi", "tglMulai": "2026-08-01", "tglSelesai": "2026-08-31", "targetBB": "60–60,5", "fokusFase": "Adaptasi ganjel pagi, jalan 5–6× di hari kerja, strength 3×, lutut aman.", "kaloriOverride": null, "checkpoint": { "bb": "60–60,5", "catatan": "Ganjel + jalan nempel (termasuk Minggu kerja)." } },
+    { "id": "paypey-f2", "profilId": "paypey", "nama": "Fase 2 — Volume naik", "tglMulai": "2026-09-01", "tglSelesai": "2026-10-31", "targetBB": "59–59,5", "fokusFase": "Volume naik, protein lock, interval jalan 1×/minggu.", "kaloriOverride": null, "checkpoint": { "bb": "59–59,5", "catatan": "Strength rapi · ngemil terkendali." } },
+    { "id": "paypey-f3", "profilId": "paypey", "nama": "Fase 3 — Definisi ringan", "tglMulai": "2026-11-01", "tglSelesai": "2026-12-31", "targetBB": "58,5–59", "fokusFase": "Definisi ringan, core lebih rapi.", "kaloriOverride": null, "checkpoint": { "bb": "58,5–59", "catatan": "Perut lebih datar." } },
+    { "id": "paypey-f4", "profilId": "paypey", "nama": "Fase 4 — Kunci", "tglMulai": "2027-01-01", "tglSelesai": "2027-01-31", "targetBB": "~58", "fokusFase": "Kunci 58 kg, cegah rebound, naik pelan ke maintenance jika target kena.", "kaloriOverride": null, "checkpoint": { "bb": "~58", "catatan": "Stabil 2 minggu · tidak rebound." } },
+
+    { "id": "ffazeyall-f01", "profilId": "ffazeyall", "nama": "Fase 0+1 — Fondasi", "tglMulai": "2026-07-16", "tglSelesai": "2026-08-31", "targetBB": "66–67", "fokusFase": "IF rapi, snack sore nempel, jalan pagi tiap hari kerja, strength form.", "kaloriOverride": null, "checkpoint": { "bb": "66–67", "catatan": "Jalan 6 hari kerja nempel." } },
+    { "id": "ffazeyall-f2", "profilId": "ffazeyall", "nama": "Fase 2 — Volume", "tglMulai": "2026-09-01", "tglSelesai": "2026-10-31", "targetBB": "62–63", "fokusFase": "Volume strength/tempo naik, interval jalan 1×, ngemil terkunci.", "kaloriOverride": null, "checkpoint": { "bb": "62–63", "catatan": "Paha/lengan lebih kencang." } },
+    { "id": "ffazeyall-f3", "profilId": "ffazeyall", "nama": "Fase 3 — Definisi", "tglMulai": "2026-11-01", "tglSelesai": "2026-12-15", "targetBB": "~60", "fokusFase": "Definisi, dorong palang 60.", "kaloriOverride": { "min": 1400, "max": 1450, "catatan": "jika energi OK" }, "checkpoint": { "bb": "~60", "catatan": "Palang utama." } },
+    { "id": "ffazeyall-f4", "profilId": "ffazeyall", "nama": "Fase 4 — Finishing", "tglMulai": "2026-12-16", "tglSelesai": "2027-01-01", "targetBB": "57–58 atau hold 60", "fokusFase": "Finishing 57–58 atau hold 60 jika haid/stres berat. Anti-rebound. Evaluasi 1 Jan + maintenance plan.", "kaloriOverride": null, "checkpoint": { "bb": "57–60", "catatan": "Ideal 57–58; sukses min = 60 stabil + cm + kencang." } }
+  ],
+
+  "jadwalMingguan": {
+    "paypey": {
+      "minggu": { "kerja": true, "pagi": "Ganjel pagi (WAJIB)", "sore": "Jalan 30–40 mnt + Core A", "fokus": "Aerobik + core", "sesi": ["jalan-steady", "pemanasan-pria", "core-a-pria"], "recovery": false },
+      "senin": { "kerja": true, "pagi": "Ganjel pagi (WAJIB)", "sore": "Full body", "fokus": "Strength 1", "sesi": ["pemanasan-pria", "fullbody-pria"], "recovery": false },
+      "selasa": { "kerja": true, "pagi": "Ganjel pagi (WAJIB)", "sore": "Jalan santai / recovery aktif 30–40 mnt", "fokus": "Recovery aktif", "sesi": ["jalan-santai"], "recovery": false },
+      "rabu": { "kerja": true, "pagi": "Ganjel pagi (WAJIB)", "sore": "Full body + Core B", "fokus": "Strength 2", "sesi": ["pemanasan-pria", "fullbody-pria", "core-b-pria"], "recovery": false },
+      "kamis": { "kerja": true, "pagi": "Ganjel pagi (WAJIB)", "sore": "Jalan ± interval (tanpa lari) 40–45 mnt", "fokus": "Fat burn / steady", "sesi": ["jalan-interval"], "recovery": false },
+      "jumat": { "kerja": true, "pagi": "Ganjel pagi (WAJIB)", "sore": "Full body + Core C", "fokus": "Strength 3 · tutup minggu kerja", "sesi": ["pemanasan-pria", "fullbody-pria", "core-c-pria"], "recovery": false },
+      "sabtu": { "kerja": false, "pagi": "Timbang + ukur pinggang pagi", "sore": "Jalan santai 20–40 mnt ATAU OFF total · meal prep", "fokus": "Recovery wajib", "sesi": ["jalan-santai"], "recovery": true, "catatan": "Jangan full body berat / balas dendam latihan." }
+    },
+    "ffazeyall": {
+      "minggu": { "kerja": true, "pagi": "Jalan 35–45 mnt", "sore": "Lower + glute", "fokus": "Paha", "sesi": ["jalan-pagi", "pemanasan-wanita", "lower-glute-wanita"], "recovery": false },
+      "senin": { "kerja": true, "pagi": "Jalan 30–40 mnt", "sore": "Upper + lengan", "fokus": "Lengan", "sesi": ["jalan-pagi", "pemanasan-wanita", "upper-lengan-wanita"], "recovery": false },
+      "selasa": { "kerja": true, "pagi": "Jalan 40–50 mnt ± interval (Fase 2+)", "sore": "Core + postur/dagu", "fokus": "Perut", "sesi": ["jalan-interval", "core-postur-wanita"], "recovery": false },
+      "rabu": { "kerja": true, "pagi": "Jalan 30–40 mnt", "sore": "Full body", "fokus": "Full", "sesi": ["jalan-pagi", "pemanasan-wanita", "fullbody-wanita"], "recovery": false },
+      "kamis": { "kerja": true, "pagi": "Jalan 35–45 mnt", "sore": "Lower accent + core", "fokus": "Paha+perut", "sesi": ["jalan-pagi", "pemanasan-wanita", "lower-core-wanita"], "recovery": false },
+      "jumat": { "kerja": true, "pagi": "Jalan 30–40 mnt", "sore": "Upper + arms finisher", "fokus": "Lengan", "sesi": ["jalan-pagi", "pemanasan-wanita", "upper-finisher-wanita"], "recovery": false },
+      "sabtu": { "kerja": false, "pagi": "Jalan panjang 45–60 mnt ATAU badminton ATAU OFF · timbang", "sore": null, "fokus": "Recovery", "sesi": ["jalan-panjang"], "recovery": true, "catatan": "Cm + foto 1×/bulan. Meal prep protein & snack untuk Min–Jum. Jangan full strength padat karena libur." }
+    }
+  },
+
+  "gerakan": [
+    { "id": "march", "nama": "March di tempat", "kategori": "pemanasan", "langkah": ["Berdiri tegak, angkat lutut bergantian setinggi pinggul.", "Ayun lengan berlawanan seperti berjalan.", "Jaga ritme santai, napas teratur."], "cue": ["Pemanasan aman lutut."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "arm-circle", "nama": "Arm circle", "kategori": "pemanasan", "langkah": ["Rentangkan kedua lengan ke samping setinggi bahu.", "Putar melingkar kecil ke depan lalu ke belakang."], "cue": [], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "hip-circle", "nama": "Hip circle", "kategori": "pemanasan", "langkah": ["Tangan di pinggang, putar panggul melingkar pelan.", "Ganti arah setelah beberapa putaran."], "cue": [], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "hip-hinge", "nama": "Hip hinge", "kategori": "pemanasan", "langkah": ["Berdiri, lutut sedikit menekuk.", "Dorong pinggul ke belakang sambil punggung lurus, lalu kembali tegak."], "cue": ["Latih pola engsel panggul sebelum RDL."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "cat-cow", "nama": "Cat-cow", "kategori": "pemanasan", "langkah": ["Posisi merangkak.", "Tarik napas cekungkan punggung (cow), buang napas bungkukkan (cat).", "Gerak perlahan mengikuti napas."], "cue": [], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "band-pull-apart", "nama": "Band pull-apart", "kategori": "upper", "langkah": ["Pegang band selebar bahu di depan dada.", "Tarik band ke samping hingga meregang, remas tulang belikat.", "Kembali perlahan."], "cue": ["Bahu turun rileks, jangan angkat bahu."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+
+    { "id": "squat-kursi", "nama": "Squat ke kursi", "kategori": "lower", "langkah": ["Berdiri di depan kursi, kaki selebar bahu.", "Dorong pinggul ke belakang, turun perlahan sentuh kursi.", "Berdiri kembali dengan kontrol."], "cue": ["Kontrol; jangan memantul.", "Lutut searah ujung kaki, tidak melewati jari kaki berlebihan."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": true, "penggantiId": "glute-bridge", "catatanLutut": "Saat nyeri lutut naik: skip, ganti glute bridge / dead bug. Nyeri >5/10 stop.", "sumberMedia": null, "lisensiMedia": null },
+    { "id": "pushup", "nama": "Push-up (wall / lutut / full)", "kategori": "upper", "langkah": ["Pilih level: dinding (termudah), lutut, atau full plank.", "Turunkan dada dengan siku ~45°, jaga badan lurus.", "Dorong kembali ke atas."], "cue": ["2 rep terakhir terasa susah = beban pas.", "Badan satu garis, pinggul tidak melorot."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "glute-bridge", "nama": "Glute bridge", "kategori": "lower", "langkah": ["Telentang, lutut menekuk, telapak kaki menapak.", "Angkat pinggul hingga badan lurus dari bahu ke lutut, remas bokong.", "Turun perlahan."], "cue": ["Aman lutut.", "Tenaga dari bokong, bukan punggung bawah."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "backpack-row", "nama": "Backpack row / Superman", "kategori": "upper", "langkah": ["Row: bungkuk engsel panggul, tarik tas/beban ke arah perut, remas punggung.", "Alternatif Superman: telungkup, angkat dada & lengan sesaat."], "cue": ["Postur & punggung terjaga.", "Bahu turun, tarik dari punggung bukan lengan."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "dead-bug", "nama": "Dead bug", "kategori": "core", "langkah": ["Telentang, lengan lurus ke atas, lutut/pinggul 90°.", "Turunkan lengan & kaki berlawanan perlahan, lalu kembali.", "Ganti sisi."], "cue": ["Pinggang nempel lantai sepanjang gerakan."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "dead-bug-pause", "nama": "Dead bug pause", "kategori": "core", "langkah": ["Sama seperti dead bug.", "Tahan 1–2 detik di posisi terjauh sebelum kembali."], "cue": ["Pinggang tetap nempel lantai.", "Napas keluar saat menjulur."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "side-leg-raise", "nama": "Side leg raise", "kategori": "lower", "langkah": ["Berbaring miring, tubuh lurus.", "Angkat kaki atas ke samping perlahan, turunkan terkontrol.", "Selesaikan satu sisi lalu ganti."], "cue": ["Kaki kiri: gerak di range yang nyaman (hati-hati).", "Gerak pelan, tidak menghentak."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": true, "penggantiId": "dead-bug", "catatanLutut": "Saat nyeri lutut naik: skip. Kaki kiri jaga range nyaman.", "sumberMedia": null, "lisensiMedia": null },
+    { "id": "calf-raise", "nama": "Calf raise", "kategori": "lower", "langkah": ["Berdiri, angkat tumit hingga jinjit.", "Turunkan perlahan.", "Pegang dinding untuk keseimbangan bila perlu."], "cue": ["Pegangan dinding OK."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "bridge-march", "nama": "Bridge march", "kategori": "core", "langkah": ["Mulai dari posisi glute bridge (pinggul terangkat).", "Angkat satu lutut bergantian tanpa menjatuhkan pinggul."], "cue": ["Pinggul stabil, tidak miring.", "Aman lutut."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "plank", "nama": "Plank", "kategori": "core", "langkah": ["Tumpu siku & ujung kaki, badan lurus.", "Kencangkan perut & bokong, tahan sesuai waktu."], "cue": ["Badan satu garis, pinggul tidak naik/melorot."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "bird-dog", "nama": "Bird-dog", "kategori": "core", "langkah": ["Posisi merangkak.", "Julurkan lengan & kaki berlawanan lurus, tahan sesaat.", "Kembali dan ganti sisi."], "cue": ["Panggul stabil, jangan berputar.", "Versi slow = lebih lambat & terkontrol."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "standing-knee-lift", "nama": "Standing knee lift", "kategori": "core", "langkah": ["Berdiri tegak.", "Angkat satu lutut ke arah dada, kencangkan perut.", "Turun terkontrol, ganti sisi."], "cue": ["Tegak, tidak membungkuk saat mengangkat lutut."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "side-plank", "nama": "Side plank (lutut)", "kategori": "core", "langkah": ["Berbaring miring, tumpu siku.", "Versi lutut: tekuk lutut sebagai tumpuan.", "Angkat pinggul hingga badan lurus, tahan."], "cue": ["Pinggul terangkat penuh, badan segaris."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "reverse-crunch", "nama": "Reverse crunch", "kategori": "core", "langkah": ["Telentang, lutut menekuk terangkat.", "Gulung panggul mengangkat pinggul ke arah dada.", "Turun perlahan."], "cue": ["Gerak dari perut bawah, bukan ayunan kaki."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "heel-tap", "nama": "Heel tap", "kategori": "core", "langkah": ["Telentang, lutut menekuk, kepala/bahu sedikit terangkat.", "Sentuh tumit bergantian dengan tangan, tekuk pinggang ke samping."], "cue": ["Perut tetap kencang."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "hollow-hold", "nama": "Hollow hold (lutut tekuk)", "kategori": "core", "langkah": ["Telentang, tekuk lutut.", "Angkat bahu & kaki sedikit, punggung bawah menempel lantai.", "Tahan."], "cue": ["Punggung bawah selalu menempel lantai."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "plank-shoulder-tap", "nama": "Plank shoulder tap", "kategori": "core", "langkah": ["Posisi plank tinggi (tumpu telapak tangan).", "Sentuh bahu berlawanan bergantian tanpa menggoyang pinggul."], "cue": ["Pinggul stabil, minim goyang."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "bicycle-lambat", "nama": "Bicycle lambat", "kategori": "core", "langkah": ["Telentang, tangan di belakang kepala.", "Sentuh siku ke lutut berlawanan bergantian, gerak lambat terkontrol."], "cue": ["Lambat > cepat; putar dari badan bukan leher."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "bridge-abduction", "nama": "Bridge abduction", "kategori": "lower", "langkah": ["Tahan posisi glute bridge.", "Buka kedua lutut ke samping lalu tutup, pinggul tetap terangkat."], "cue": ["Pinggul stabil.", "Aman lutut."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "vacuum", "nama": "Stomach vacuum", "kategori": "core", "langkah": ["Buang napas penuh.", "Tarik perut ke dalam sedalam mungkin, tahan.", "Napas normal setelah selesai."], "cue": ["Latihan perut dalam & postur."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+
+    { "id": "goblet-squat", "nama": "Goblet squat", "kategori": "lower", "langkah": ["Pegang KB di depan dada dengan dua tangan.", "Turun squat dengan punggung tegak, tempo 3 detik turun.", "Dorong kembali berdiri."], "cue": ["Tempo 3 dtk turun.", "Punggung tegak, tumit menapak."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": true, "penggantiId": "glute-bridge", "catatanLutut": "Untuk paypey (deep squat berat dihindari): ganti glute bridge / squat ke kursi.", "sumberMedia": null, "lisensiMedia": null },
+    { "id": "rdl", "nama": "Romanian deadlift (RDL)", "kategori": "lower", "langkah": ["Pegang KB, kaki selebar pinggul.", "Engsel panggul ke belakang, turunkan beban sepanjang paha, punggung lurus.", "Kembali tegak dengan meremas bokong."], "cue": ["Punggung lurus, gerak dari engsel panggul.", "Terasa tarikan di paha belakang."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "reverse-lunge", "nama": "Reverse lunge", "kategori": "lower", "langkah": ["Berdiri tegak.", "Langkahkan satu kaki ke belakang, turunkan lutut belakang mendekati lantai.", "Dorong kembali berdiri, ganti sisi."], "cue": ["Badan tegak, lutut depan searah kaki."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": true, "penggantiId": "glute-bridge", "catatanLutut": "Termasuk 'lunges dalam' yang dihindari paypey. Ganti glute bridge / bridge march.", "sumberMedia": null, "lisensiMedia": null },
+    { "id": "monster-walk", "nama": "Band side / monster walk", "kategori": "lower", "langkah": ["Pasang band di atas lutut atau pergelangan kaki.", "Posisi setengah squat, melangkah ke samping menjaga tegangan band."], "cue": ["Lutut tidak menutup ke dalam."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "clamshell", "nama": "Clamshell band", "kategori": "lower", "langkah": ["Berbaring miring, lutut menekuk, band di atas lutut.", "Buka lutut atas seperti kerang tanpa memutar panggul.", "Tutup perlahan."], "cue": ["Panggul diam, hanya lutut membuka."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "wall-sit", "nama": "Wall sit", "kategori": "lower", "langkah": ["Sandarkan punggung di dinding, turun hingga paha sejajar lantai (atau lebih tinggi jika lutut nyaman).", "Tahan sesuai waktu."], "cue": ["Sesuaikan kedalaman dengan kenyamanan lutut."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "floor-press", "nama": "Floor press", "kategori": "upper", "langkah": ["Telentang, pegang KB dengan dua tangan di dada.", "Dorong lurus ke atas, turunkan hingga siku menyentuh lantai."], "cue": ["Pergelangan lurus, dorong stabil."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "bent-over-row", "nama": "Bent-over row", "kategori": "upper", "langkah": ["Engsel panggul membungkuk, punggung lurus, pegang KB.", "Tarik beban ke arah perut, remas punggung.", "Turun terkontrol."], "cue": ["Bahu turun, tarik dari punggung."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "single-arm-press", "nama": "Single-arm press", "kategori": "upper", "langkah": ["Pegang KB setinggi bahu satu tangan.", "Dorong ke atas hingga lengan lurus, turunkan.", "Selesai satu sisi lalu ganti."], "cue": ["Inti kencang, badan tidak condong."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "curl", "nama": "Biceps curl", "kategori": "upper", "langkah": ["Pegang DB/KB, lengan lurus di samping.", "Tekuk siku mengangkat beban, remas biceps.", "Turun perlahan."], "cue": ["Siku diam menempel badan."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "triceps-kickback", "nama": "Triceps kickback / overhead", "kategori": "upper", "langkah": ["Kickback: bungkuk, luruskan lengan ke belakang dari siku.", "Overhead: angkat beban di atas kepala, tekuk-luruskan siku."], "cue": ["Gerak dari siku, lengan atas diam."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "lateral-raise", "nama": "Lateral raise", "kategori": "upper", "langkah": ["Pegang DB di samping.", "Angkat lengan ke samping hingga setinggi bahu.", "Turun perlahan."], "cue": ["Bahu tidak mengangkat ke telinga."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "band-face-pull", "nama": "Band face pull", "kategori": "upper", "langkah": ["Kaitkan band setinggi wajah.", "Tarik band ke arah dahi, siku terbuka ke samping, remas belikat."], "cue": ["Baik untuk postur bahu."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "wall-angel", "nama": "Wall angel", "kategori": "upper", "langkah": ["Punggung & kepala menempel dinding, lengan membentuk huruf W.", "Geser lengan naik-turun menjaga kontak dengan dinding."], "cue": ["Support postur & double chin.", "Jaga punggung bawah tidak melengkung berlebih."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "chin-tuck", "nama": "Chin tuck", "kategori": "postur", "langkah": ["Tegak, tarik dagu ke belakang membuat 'dagu ganda' sadar.", "Tahan sebentar, lepas."], "cue": ["Support postur leher & double chin.", "Hasil utama double chin = fat loss total + postur, bukan gerakan dagu saja."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "sumo-goblet", "nama": "Sumo goblet squat", "kategori": "lower", "langkah": ["Kaki lebih lebar, ujung kaki mengarah keluar, pegang KB di dada.", "Turun squat menjaga punggung tegak.", "Dorong kembali berdiri."], "cue": ["Lutut searah ujung kaki."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": true, "penggantiId": "glute-bridge", "catatanLutut": "Untuk paypey: kategori deep squat berat, ganti glute bridge / squat ke kursi.", "sumberMedia": null, "lisensiMedia": null },
+    { "id": "single-leg-bridge", "nama": "Single-leg glute bridge", "kategori": "lower", "langkah": ["Posisi glute bridge, luruskan satu kaki.", "Angkat pinggul dengan satu kaki tumpu, remas bokong.", "Ganti sisi."], "cue": ["Pinggul rata, tidak miring.", "Aman lutut."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "suitcase-carry", "nama": "Suitcase carry", "kategori": "full", "langkah": ["Pegang KB di satu sisi seperti menjinjing koper.", "Jalan lurus menjaga badan tegak tidak miring.", "Ganti sisi."], "cue": ["Badan tegak, bahu rata."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+
+    { "id": "jalan-steady", "nama": "Jalan kaki steady", "kategori": "jalan", "langkah": ["Jalan pace nyaman di permukaan rata.", "Jaga durasi sesuai fase."], "cue": ["Permukaan rata, aman lutut."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "jalan-santai", "nama": "Jalan santai / recovery", "kategori": "jalan", "langkah": ["Jalan pace ngobrol, ringan.", "Tambahkan stretch ringan setelahnya."], "cue": ["Recovery aktif, bukan latihan berat."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "jalan-interval", "nama": "Jalan interval (tanpa lari)", "kategori": "jalan", "langkah": ["Pemanasan 5 mnt.", "Ulangi: 2 mnt cepat + 2 mnt normal × 6–8.", "Pendinginan 5 mnt."], "cue": ["Cepat = masih jalan, BUKAN lari (aman lutut)."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "jalan-pagi", "nama": "Jalan pagi", "kategori": "jalan", "langkah": ["Jalan pagi (boleh puasa + air/teh).", "Durasi sesuai hari & fase."], "cue": ["Kompensasi duduk 6 hari kerja."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null },
+    { "id": "jalan-panjang", "nama": "Jalan panjang (Sabtu)", "kategori": "jalan", "langkah": ["Jalan panjang santai 45–60 mnt.", "Alternatif: badminton, atau OFF total bila lelah kumulatif."], "cue": ["Recovery, jangan latihan berat."], "media": { "foto": null, "video": null, "animasi": null }, "risikoLutut": false, "penggantiId": null, "sumberMedia": null, "lisensiMedia": null }
+  ],
+
+  "sesiLatihan": [
+    {
+      "id": "pemanasan-pria", "profilId": "paypey", "nama": "Pemanasan 5 mnt", "kategori": "pemanasan", "set": 1,
+      "item": [
+        { "gerakanId": "march", "target": "60 dtk" },
+        { "gerakanId": "arm-circle", "target": "30" },
+        { "gerakanId": "hip-circle", "target": "30" },
+        { "gerakanId": "squat-kursi", "target": "10" },
+        { "gerakanId": "pushup", "target": "10 (wall)" },
+        { "gerakanId": "cat-cow", "target": "8" }
+      ]
+    },
+    {
+      "id": "fullbody-pria", "profilId": "paypey", "nama": "Full body (Sen/Rab/Jum)", "kategori": "full", "set": 3, "istirahat": "45–60 dtk",
+      "item": [
+        { "gerakanId": "squat-kursi", "rep": "10–15" },
+        { "gerakanId": "pushup", "rep": "8–15" },
+        { "gerakanId": "glute-bridge", "rep": "12–15" },
+        { "gerakanId": "backpack-row", "rep": "10–12" },
+        { "gerakanId": "dead-bug", "rep": "8–10/sisi" },
+        { "gerakanId": "side-leg-raise", "rep": "10–12" },
+        { "gerakanId": "calf-raise", "rep": "12–15" }
+      ]
+    },
+    {
+      "id": "core-a-pria", "profilId": "paypey", "nama": "Core A (Minggu, setelah jalan)", "kategori": "core", "set": 3,
+      "item": [
+        { "gerakanId": "dead-bug", "rep": "8/sisi" },
+        { "gerakanId": "bridge-march", "rep": "8/sisi" },
+        { "gerakanId": "plank", "target": "20–40 dtk" },
+        { "gerakanId": "bird-dog", "rep": "8/sisi" },
+        { "gerakanId": "standing-knee-lift", "rep": "12/sisi", "set": 2 }
+      ]
+    },
+    {
+      "id": "core-b-pria", "profilId": "paypey", "nama": "Core B (Rabu, setelah full body)", "kategori": "core", "set": 3,
+      "item": [
+        { "gerakanId": "dead-bug-pause", "rep": "6/sisi" },
+        { "gerakanId": "side-plank", "target": "15–30 dtk/sisi" },
+        { "gerakanId": "reverse-crunch", "rep": "10–12" },
+        { "gerakanId": "heel-tap", "rep": "10/sisi" },
+        { "gerakanId": "hollow-hold", "target": "15–25 dtk" }
+      ]
+    },
+    {
+      "id": "core-c-pria", "profilId": "paypey", "nama": "Core C (Jumat, setelah full body)", "kategori": "core", "set": 3,
+      "item": [
+        { "gerakanId": "plank-shoulder-tap", "rep": "8/sisi" },
+        { "gerakanId": "bicycle-lambat", "rep": "10/sisi" },
+        { "gerakanId": "bridge-abduction", "rep": "12" },
+        { "gerakanId": "bird-dog", "rep": "8/sisi (slow)" },
+        { "gerakanId": "vacuum", "target": "20 dtk × 3" }
+      ]
+    },
+
+    {
+      "id": "pemanasan-wanita", "profilId": "ffazeyall", "nama": "Pemanasan 5 mnt", "kategori": "pemanasan", "set": 1,
+      "item": [
+        { "gerakanId": "march", "target": "60" },
+        { "gerakanId": "arm-circle", "target": "30" },
+        { "gerakanId": "hip-hinge", "target": "10" },
+        { "gerakanId": "squat-kursi", "target": "10 (BW)" },
+        { "gerakanId": "band-pull-apart", "target": "15" },
+        { "gerakanId": "cat-cow", "target": "8" }
+      ]
+    },
+    {
+      "id": "lower-glute-wanita", "profilId": "ffazeyall", "nama": "Lower + glute (Minggu)", "kategori": "lower", "set": 3, "istirahat": "40–60 dtk",
+      "item": [
+        { "gerakanId": "goblet-squat", "rep": "12–18", "beban": "KB 4 kg · tempo 3 dtk turun" },
+        { "gerakanId": "rdl", "rep": "12–15", "beban": "KB 4 kg" },
+        { "gerakanId": "reverse-lunge", "rep": "10–14/sisi", "beban": "BW → +KB" },
+        { "gerakanId": "glute-bridge", "rep": "15–20", "beban": "KB di pinggul" },
+        { "gerakanId": "monster-walk", "rep": "12–15/sisi", "beban": "Band" },
+        { "gerakanId": "clamshell", "rep": "15–20/sisi", "beban": "Band" },
+        { "gerakanId": "wall-sit", "target": "30–50 dtk", "beban": "BW" },
+        { "gerakanId": "calf-raise", "rep": "15–20", "beban": "BW / pegang KB" }
+      ]
+    },
+    {
+      "id": "upper-lengan-wanita", "profilId": "ffazeyall", "nama": "Upper + lengan (Senin)", "kategori": "upper", "set": 3, "istirahat": "30–45 dtk",
+      "item": [
+        { "gerakanId": "floor-press", "rep": "12–18", "beban": "KB 4 kg 2 tangan" },
+        { "gerakanId": "bent-over-row", "rep": "12–15", "beban": "KB 4 kg" },
+        { "gerakanId": "single-arm-press", "rep": "10–14/sisi", "beban": "KB bergantian" },
+        { "gerakanId": "pushup", "rep": "8–15", "beban": "BW" },
+        { "gerakanId": "band-pull-apart", "rep": "15–25", "beban": "Band (pull-apart / row)" },
+        { "gerakanId": "curl", "rep": "15–20", "beban": "DB 1 kg / KB 2 tangan" },
+        { "gerakanId": "triceps-kickback", "rep": "15–20", "beban": "DB 1 kg / KB" },
+        { "gerakanId": "lateral-raise", "rep": "15–20", "beban": "DB 1 kg" },
+        { "gerakanId": "band-face-pull", "rep": "15–20", "beban": "Band" }
+      ]
+    },
+    {
+      "id": "core-postur-wanita", "profilId": "ffazeyall", "nama": "Core + postur/dagu (Selasa)", "kategori": "core", "set": "2–3", "durasi": "20–25 mnt",
+      "item": [
+        { "gerakanId": "dead-bug", "rep": "8–12/sisi" },
+        { "gerakanId": "plank", "target": "25–50 dtk" },
+        { "gerakanId": "side-plank", "target": "20–35 dtk/sisi" },
+        { "gerakanId": "bridge-march", "rep": "8–10/sisi" },
+        { "gerakanId": "bird-dog", "rep": "8–10/sisi" },
+        { "gerakanId": "reverse-crunch", "rep": "12–15" },
+        { "gerakanId": "vacuum", "target": "20–30 dtk × 3" },
+        { "gerakanId": "chin-tuck", "rep": "10×" },
+        { "gerakanId": "wall-angel", "rep": "8–10×" }
+      ]
+    },
+    {
+      "id": "fullbody-wanita", "profilId": "ffazeyall", "nama": "Full body circuit (Rabu)", "kategori": "full", "set": 3,
+      "item": [
+        { "gerakanId": "goblet-squat", "rep": "15", "beban": "KB" },
+        { "gerakanId": "bent-over-row", "rep": "12–15", "beban": "KB" },
+        { "gerakanId": "rdl", "rep": "12", "beban": "KB" },
+        { "gerakanId": "pushup", "rep": "10–15", "beban": "BW" },
+        { "gerakanId": "glute-bridge", "rep": "15–20", "beban": "KB" },
+        { "gerakanId": "curl", "rep": "15–20", "beban": "DB 1 kg" },
+        { "gerakanId": "dead-bug", "rep": "8/sisi" },
+        { "gerakanId": "suitcase-carry", "target": "30–45 dtk/sisi", "beban": "KB" }
+      ]
+    },
+    {
+      "id": "lower-core-wanita", "profilId": "ffazeyall", "nama": "Lower accent + core (Kamis)", "kategori": "lower", "set": 3,
+      "item": [
+        { "gerakanId": "sumo-goblet", "rep": "15–18", "beban": "KB" },
+        { "gerakanId": "reverse-lunge", "rep": "10–12/sisi" },
+        { "gerakanId": "single-leg-bridge", "rep": "10–12/sisi" },
+        { "gerakanId": "monster-walk", "rep": "12/sisi", "beban": "Band" },
+        { "gerakanId": "rdl", "rep": "12", "beban": "KB" },
+        { "gerakanId": "plank", "target": "30–50 dtk" },
+        { "gerakanId": "bicycle-lambat", "rep": "12–16/sisi" },
+        { "gerakanId": "calf-raise", "rep": "15–20" }
+      ]
+    },
+    {
+      "id": "upper-finisher-wanita", "profilId": "ffazeyall", "nama": "Upper ringkas + arms finisher (Jumat)", "kategori": "upper", "set": "2–3",
+      "item": [
+        { "gerakanId": "floor-press", "beban": "KB" },
+        { "gerakanId": "bent-over-row", "beban": "KB" },
+        { "gerakanId": "pushup", "beban": "BW" },
+        { "gerakanId": "band-pull-apart", "beban": "Band" },
+        { "gerakanId": "single-arm-press", "beban": "DB 1 kg shoulder press volume" }
+      ],
+      "finisher": { "ronde": 2, "beban": "DB 1 kg", "item": [
+        { "gerakanId": "curl", "rep": "20" },
+        { "gerakanId": "triceps-kickback", "rep": "20" },
+        { "gerakanId": "lateral-raise", "rep": "18" },
+        { "gerakanId": "curl", "rep": "20 (band curl)" },
+        { "gerakanId": "pushup", "rep": "max rapi" }
+      ] }
+    }
+  ],
+
+  "aturanMakan": {
+    "paypey": {
+      "polaMakan": "ganjel-pagi",
+      "slot": [
+        { "waktu": "04.00–04.40", "nama": "Ganjel pre-kerja (WAJIB)", "kkal": "150–250", "catatan": "Jangan skip — termasuk hari Minggu kerja." },
+        { "waktu": "10.30–14.30", "nama": "Makan siang utama", "kkal": "500–650", "catatan": "Protein + sayur + nasi." },
+        { "waktu": "16.30–18.00", "nama": "Snack post-kerja / pre-latihan", "kkal": "150–250", "catatan": null },
+        { "waktu": "19.00–20.30", "nama": "Makan malam", "kkal": "500–650", "catatan": "Protein tinggi." },
+        { "waktu": "Opsional", "nama": "Ngemil malam", "kkal": "max 150", "catatan": "Protein/serat · air dulu 10 mnt." }
+      ],
+      "piring": "Protein 1 telapak · sayur 2 genggam · nasi 1 genggam · minyak 1 jempol / max 1 sdm.",
+      "catatan": [
+        "Terong balado 3–4×/minggu OK · minyak max 1 sdm · + telur/tempe/ayam.",
+        "Ganjel pick: roti+telur · pisang+telur · nasi sisa+telur · oatmeal+telur.",
+        "Snack aman: telur rebus, pisang, yogurt, kacang 1 genggam kecil.",
+        "Hindari jengkol/pete/ikan berduri.",
+        "Sabtu (libur): jadwal makan boleh longgar waktunya, tapi kalori & protein tetap on-plan. Bukan hari pesta total."
+      ],
+      "rotasiContoh": {
+        "_sumber": "dokumen",
+        "isi": [
+          "Siang: nasi 100–120 g + telur 2 / tempe / ayam 100 g + sayur (terong balado minyak 1 sdm OK).",
+          "Malam: mirip siang, karbo sedikit lebih kecil jika kurang gerak.",
+          "Mie: rebus + telur + sayur, max 2×/minggu.",
+          "Nasi goreng diet: nasi 100 g + 2 telur + sawi + minyak 1 sdt."
+        ]
+      },
+      "menuMingguan": {
+        "_sumber": "turunan-cc",
+        "_disclaimer": "Menu 7 hari ini DISUSUN CC dari bahan yang disebut dokumen (bukan menu fix di PDF). Porsi indikatif; sesuaikan ke target kalori 1.700–1.900 & selera. Silakan koreksi.",
+        "hari": {
+          "minggu": { "ganjel": "Roti + telur 2", "siang": "Nasi 110 g + ayam 100 g + terong balado (minyak 1 sdm) + sayur", "snack": "Pisang + telur rebus", "malam": "Nasi 90 g + tempe + tumis sawi" },
+          "senin": { "ganjel": "Pisang + telur", "siang": "Nasi 110 g + telur 2 + sayur", "snack": "Yogurt + kacang 1 genggam kecil", "malam": "Ikan + lalap + nasi 90 g" },
+          "selasa": { "ganjel": "Oatmeal + telur", "siang": "Nasi 110 g + ayam 100 g + sayur", "snack": "Pisang", "malam": "Nasi goreng diet (nasi 100 g + 2 telur + sawi + minyak 1 sdt)" },
+          "rabu": { "ganjel": "Nasi sisa + telur", "siang": "Nasi 110 g + tempe + terong balado + sayur", "snack": "Telur rebus", "malam": "Mie rebus + telur + sayur" },
+          "kamis": { "ganjel": "Roti + telur", "siang": "Nasi 110 g + ayam 100 g + sayur", "snack": "Yogurt + pisang", "malam": "Nasi 90 g + tahu tempe + sayur" },
+          "jumat": { "ganjel": "Pisang + telur", "siang": "Nasi 110 g + telur 2 / ayam + sayur", "snack": "Kacang 1 genggam kecil", "malam": "Ikan bakar + lalap + nasi 90 g" },
+          "sabtu": { "ganjel": "Oatmeal + telur", "siang": "Meal prep protein + sayur + nasi 100 g", "snack": "Buah", "malam": "Sup ayam + tahu + nasi 90 g" }
+        }
+      }
+    },
+    "ffazeyall": {
+      "polaMakan": "IF",
+      "window": "11.00–19.00",
+      "slot": [
+        { "waktu": "11.00–12.00", "nama": "Makan 1 terbesar + protein", "kkal": "550–650", "catatan": null },
+        { "waktu": "15.00–16.30", "nama": "Snack wajib (cegah ngemil malam + bekal strength)", "kkal": "150–250", "catatan": null },
+        { "waktu": "18.00–19.00", "nama": "Makan 2 protein tinggi", "kkal": "500–600", "catatan": null },
+        { "waktu": "Setelah 19.00", "nama": "Air / teh hijau tawar", "kkal": "0", "catatan": null }
+      ],
+      "piring": "Protein 1–2 telapak · sayur 2 genggam · karbo 1 genggam · lemak 1 jempol.",
+      "catatan": [
+        "Protein tanpa telur rebus/setengah matang: omelet/dadar matang · ayam · ikan · tahu-tempe · daging giling · yogurt plain · susu · edamame · protein powder opsional.",
+        "Favorit terkontrol 1–2×/minggu: bakso (kuah, 5–7 butir, banyak sawi, skip kerupuk berlebih), mie ayam (mie ½–¾, ayam banyak, minyak disisihkan), siomay (kukus 4–6 + tahu, kacang 1 sdm, lalap).",
+        "Jalan pagi puasa (06.00) boleh + air/teh.",
+        "Lantai aman ≥1.300 kkal.",
+        "Sabtu (libur): IF boleh tetap 11–19 atau longgarkan sedikit, kalori tetap on-plan. Bukan pesta makan balas dendam."
+      ],
+      "ngemilMalam": [
+        "Snack sore wajib tiap hari kerja.",
+        "Setelah 19.00 lapar: air 300 ml + sikat gigi + teh · tunggu 15 mnt.",
+        "Masih lapar berat: yogurt/edamame kecil — catat, jangan guilt.",
+        "Ngemil stres kantor: jalan 5 mnt / stretch / chat — bukan larangan ekstrem.",
+        "Darurat stok: yogurt, buah, edamame, susu, crackers + tuna."
+      ],
+      "rotasiContoh": {
+        "_sumber": "dokumen",
+        "isi": [
+          "Makan 1: Nasi 90–100 g + ayam 120 g + sawi · atau omelet 2 telur + sayur + roti/nasi kecil · atau mie ayam diet.",
+          "Snack: Yogurt+pisang · edamame · buah+susu · yogurt+oat.",
+          "Makan 2: Tahu tempe + sayur + nasi 70–80 g · ikan bakar + lalap · sup ayam + tahu · pepes + nasi."
+        ]
+      },
+      "menuMingguan": {
+        "_sumber": "turunan-cc",
+        "_disclaimer": "Menu 7 hari ini DISUSUN CC dari bahan yang disebut dokumen (bukan menu fix di PDF). IF window 11.00–19.00; porsi indikatif untuk target 1.400–1.550 kkal. Silakan koreksi.",
+        "hari": {
+          "minggu": { "makan1": "Nasi 90 g + ayam 120 g + sawi", "snack": "Yogurt + pisang", "makan2": "Tahu tempe + sayur + nasi 70 g" },
+          "senin": { "makan1": "Omelet 2 telur + sayur + roti kecil", "snack": "Edamame", "makan2": "Ikan bakar + lalap" },
+          "selasa": { "makan1": "Nasi 90 g + ayam 120 g + sayur", "snack": "Buah + susu", "makan2": "Sup ayam + tahu" },
+          "rabu": { "makan1": "Mie ayam diet (mie ¾, ayam banyak, minyak disisihkan)", "snack": "Yogurt + oat", "makan2": "Pepes + nasi 70 g + lalap" },
+          "kamis": { "makan1": "Nasi 90 g + daging giling + sayur", "snack": "Edamame", "makan2": "Tahu tempe + sayur + nasi 70 g" },
+          "jumat": { "makan1": "Omelet 2 telur + sayur + nasi kecil", "snack": "Yogurt + pisang", "makan2": "Ikan + lalap + sayur" },
+          "sabtu": { "makan1": "Bakso kuah 6 butir + banyak sawi", "snack": "Buah", "makan2": "Ayam + sayur + nasi 70 g (meal prep)" }
+        }
+      }
+    }
+  },
+
+  "aturanHaid": {
+    "berlakuUntuk": "ffazeyall",
+    "periode": "H1–H3",
+    "kaloriDelta": { "min": 100, "max": 200 },
+    "strengthFaktor": 0.7,
+    "strengthCatatan": "Strength −30% (tampilkan rep/set terkoreksi); jalan tetap di hari kerja.",
+    "skipInterval": true,
+    "jalanTetap": true,
+    "catatanBB": "BB naik = retensi air, wajar. Bandingkan BB di Sabtu 1–2 minggu setelah haid selesai untuk tren sejati.",
+    "catatan": ["Protein & zat besi dijaga.", "Jangan tunggu weekend untuk longgarkan — weekend cuma Sabtu."]
+  },
+
+  "aturanLutut": {
+    "berlakuUntuk": "paypey",
+    "pantangan": ["loncat", "lari sprint", "lunges dalam", "burpee lompat", "deep squat berat"],
+    "boleh": ["jalan datar", "squat ke kursi", "glute bridge", "core lantai", "push-up", "march"],
+    "prinsip": "Nyeri >5/10 atau bengkak → stop. Nyaman > ego. Bukan pengganti saran dokter/fisio.",
+    "saatNyeriNaik": "Skip squat & leg raise · fokus push-up, row, bridge, dead bug, jalan pelan.",
+    "konteks": "Pasca operasi patah tulang paha kiri; lutut kiri tidak sedia kala."
+  },
+
+  "progresi": {
+    "paypey": {
+      "jalan": [
+        { "fase": "Agu", "durasi": "30–40 mnt", "catatan": "Steady · 5–6 hari di slot jalan." },
+        { "fase": "Sep–Okt", "durasi": "40–50 mnt", "catatan": "Kamis: interval 2 mnt cepat + 2 mnt normal × 6–8 (bukan lari)." },
+        { "fase": "Nov–Des", "durasi": "40–50 mnt", "catatan": "Jaga · hujan = march indoor." },
+        { "fase": "Jan", "durasi": "30–40 mnt", "catatan": "Sustain." }
+      ],
+      "strength": "Tiap 1–2 minggu pilih 1: +2 rep · turun 3 dtk · botol air sebagai beban · +5 mnt jalan. Kerja 6 hari berdiri sudah 'latihan' — jangan overtrain.",
+      "targetMenangMingguan": "Jalan ≥5 · full body 3 (Sen/Rab/Jum) · core ≥2 · 1 recovery (Sabtu) · tidur 21–22.30."
+    },
+    "ffazeyall": {
+      "jalan": [
+        { "fase": "16 Jul–31 Agu", "durasi": "30–45 mnt steady × 6", "sabtu": "40–60 santai / OFF" },
+        { "fase": "Sep–Okt", "durasi": "35–50 mnt · 1× interval (Selasa pagi)", "sabtu": "45–60 / badminton" },
+        { "fase": "Nov–15 Des", "durasi": "40–55 mnt jaga konsistensi 6 hari", "sabtu": "Jaga / aktif senang" },
+        { "fase": "16 Des–1 Jan", "durasi": "30–45 mnt — jangan absen total", "sabtu": "Fleksibel anti-rebound" }
+      ],
+      "strength": "Tanpa beli beban, pilih 1 tiap 1–2 minggu: +2–4 rep · tempo 4 dtk · pause 2 dtk · istirahat −10 dtk · +1 set · single-leg · band lebih kencang · 1½ rep. Opsional nanti DB 3–5 kg — bukan wajib.",
+      "targetMenangMingguan": "Jalan pagi ≥5–6 hari kerja · strength sore ≥5 · core ≥2 · 1 recovery (Sabtu) · langkah 8.000–11.000/hari · stand break kantor 3–5 mnt tiap 1–2 jam.",
+      "doubleChin": "Fat loss total + chin tuck + wall angel + postur HP + tidur. 2–3 mnt pelengkap 3–4×/minggu di hari core/postur (Selasa) atau pendinginan."
+    }
+  },
+
+  "tracking": {
+    "paypey": [
+      { "metrik": "BB", "frekuensi": "2–3×/minggu", "cara": "Pagi, setelah BAK, puasa · ideal timbang juga tiap Sabtu pagi." },
+      { "metrik": "Lingkar pinggang", "frekuensi": "1×/minggu", "cara": "Sabtu pagi, sejajar pusar." },
+      { "metrik": "Foto", "frekuensi": "2×/bulan", "cara": "Depan/samping/belakang." },
+      { "metrik": "Nyeri lutut", "frekuensi": "Tiap latihan", "cara": "Skala 0–10." }
+    ],
+    "ffazeyall": [
+      { "metrik": "BB", "frekuensi": "1×/minggu", "cara": "Sabtu pagi (hari paling konsisten)." },
+      { "metrik": "Cm", "frekuensi": "1×/bulan", "cara": "Sabtu pagi, pita sama." },
+      { "metrik": "Foto", "frekuensi": "1×/bulan", "cara": "Sabtu, lighting sama." },
+      { "metrik": "Haid & energi", "frekuensi": "Harian singkat", "cara": "Supaya tidak panik retensi di hari kerja." },
+      { "metrik": "Kepatuhan jalan 6 hari", "frekuensi": "Mingguan", "cara": "Skor berapa hari kerja jalan pagi berhasil." }
+    ],
+    "aturanBB": {
+      "paypey": "Turun 0,2–0,6 kg/2 mgg = pas · stuck 3 mgg patuh = −100 kkal atau +10 mnt jalan · turun >1 kg/minggu = makan sedikit lebih banyak.",
+      "ffazeyall": "0,4–0,7 kg/minggu rata = pas · <0,3 × 3 mgg patuh = −100 kkal atau +10–15 mnt jalan · >1 kg/minggu × 2 = +100–150 kkal · cm turun meski BB stuck = lanjut · lemas/haid kacau/rontok = longgarkan defisit."
+    }
+  },
+
+  "cadangan": {
+    "paypey": [
+      { "situasi": "Hanya 15–20 mnt", "ganti": "Express: jalan/march 10 + 2 ronde (squat kursi 12 · push-up 10 · bridge 15 · dead bug 8/sisi · plank 30)." },
+      { "situasi": "Sangat lelah (6 hari kerja)", "ganti": "Jalan 20 mnt saja = tetap menang." },
+      { "situasi": "Nyeri lutut naik", "ganti": "Skip squat & leg raise · fokus push-up, row, bridge, dead bug, jalan pelan." },
+      { "situasi": "Motivasi drop", "ganti": "Aturan 10 menit: mulai dulu." },
+      { "situasi": "Hujan", "ganti": "March indoor + workout hari itu." },
+      { "situasi": "Sabtu tergoda full gym", "ganti": "Jangan — Sabtu untuk recovery; simpan strength di Sen/Rab/Jum." }
+    ],
+    "ffazeyall": [
+      { "situasi": "Hanya 20 mnt", "ganti": "Express: march 8 + 3 ronde (squat KB 15 · push-up 12 · KB row 12 · bridge 20 · plank 35)." },
+      { "situasi": "Motivasi drop", "ganti": "Aturan 10 menit." },
+      { "situasi": "Hujan", "ganti": "March indoor + strength hari itu." },
+      { "situasi": "Haid H1–H3", "ganti": "Jalan pelan tetap (hari kerja) · strength −rep/set · skip interval · protein & zat besi dijaga." },
+      { "situasi": "Stres berat 6 hari kantor", "ganti": "Jalan + core + tidur > circuit padat." },
+      { "situasi": "Skip 1 pagi kerja", "ganti": "Ganti march 20 mnt sore · jangan tunggu Sabtu." }
+    ]
+  },
+
+  "starter14Hari": {
+    "paypey": [
+      "Ganjel pagi setiap hari kerja (Min–Jum)",
+      "Protein tiap makan utama",
+      "Air min. 2 L",
+      "Ngemil manis max 1 porsi/hari",
+      "Terong balado minyak max 1 sdm",
+      "Jalan 30 mnt × min. 5 hari",
+      "Full body Sen+Rab+Jum pelan",
+      "Core A di Minggu 1×",
+      "Sabtu: timbang + istirahat sadar",
+      "Baseline BB, pinggang, foto"
+    ],
+    "ffazeyall": [
+      "IF 11–19 konsisten Min–Jum (+Sabtu)",
+      "Protein tiap makan utama",
+      "Snack sore wajib hari kerja",
+      "Air 2 L+ · minyak sadar sendok",
+      "Protokol ngemil malam",
+      "Jalan pagi min. 30 mnt × 6 hari kerja",
+      "Strength sore 5× pelajari form (Min–Jum)",
+      "Sabtu: timbang + istirahat sadar",
+      "Baseline foto + semua cm + BB",
+      "Catat haid jika bertepatan"
+    ]
+  },
+
+  "redFlag": {
+    "catatan": "Bukan pengganti saran dokter/ahli gizi klinis personal.",
+    "ffazeyall": "Longgarkan / cek medis: pusing sering, pingsan, nyeri dada, sesak tidak wajar, drop >1,2 kg/minggu terus, haid hilang ≥2 siklus, perilaku disordered, nyeri sendi hebat.",
+    "paypey": "Nyeri lutut >5/10 atau bengkak → stop. Nyeri sendi tajam / pusing berulang / sesak tidak wajar → stop."
+  },
+
+  "motivasi": {
+    "paypey": "Konsisten di 6 hari kerja > sempurna di kertas · Sabtu untuk pulih, bukan pesta latihan. Target menang: 4 hari terisi/minggu sudah bagus; 6/6 tidak wajib. Tidur 21–22.30 = latihan tersembunyi paling penting.",
+    "ffazeyall": "6 pagi jalan di hari kerja mengalahkan 1 weekend sempurna di kertas · Sabtu untuk pulih & meal prep · Cepat yang aman > brutal yang rebound. 1 hari jelek ≠ restart dari nol."
+  }
+}

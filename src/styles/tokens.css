@@ -1,0 +1,18 @@
+:root {
+  --c-cream:      #F7F1E6;
+  --c-cream-2:    #EFE6D6;
+  --c-terracotta: #C96F4A;
+  --c-terra-soft: #E0A183;
+  --c-sage:       #7C8B6B;
+  --c-sage-soft:  #A9B79A;
+  --c-ink:        #3A342C;
+  --c-ink-soft:   #6B6357;
+  --c-line:       #DCCFBB;
+  --c-danger:     #B5533F;
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 22px;
+  --shadow-soft: 0 2px 8px rgba(58,52,44,.08);
+  --font-head: 'Fraunces', Georgia, serif;
+  --font-body: 'Quicksand', system-ui, sans-serif;
+}

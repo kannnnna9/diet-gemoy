@@ -1,0 +1,7 @@
+node_modules
+dist
+
+# Privat — jangan ikut repo publik (sumber kebenaran: repo proyek-docs)
+docs/
+kerangka/
+.superpowers/
