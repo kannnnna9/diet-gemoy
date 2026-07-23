@@ -3,340 +3,54 @@
     <h2 class="page-title">Program</h2>
     <p class="page-subtitle">untuk <strong>{{ namaTampil }}</strong></p>
 
-    <section class="card">
-      <h3 class="card-title">Ringkasan</h3>
-      <div class="info-grid">
-        <div class="info-item">
-          <span class="info-label">Kalori</span>
-          <span class="info-val">{{ profil.kalori.min }}–{{ profil.kalori.max }} kkal</span>
-        </div>
-        <div class="info-item">
-          <span class="info-label">Protein</span>
-          <span class="info-val">{{ profil.protein.min }}–{{ profil.protein.max }} g</span>
-        </div>
-        <div class="info-item">
-          <span class="info-label">BB target</span>
-          <span class="info-val">{{ profil.baseline.bbAwal }} → {{ profil.baseline.bbTarget }} kg</span>
-        </div>
-        <div class="info-item">
-          <span class="info-label">Pola makan</span>
-          <span class="info-val">{{ profil.polaMakan.tipe === 'IF' ? 'IF ' + profil.polaMakan.window : 'Ganjel pagi' }}</span>
-        </div>
-      </div>
-    </section>
+    <div class="subtabs">
+      <button class="subtab" :class="{ active: tab === 'latihan' }" @click="tab = 'latihan'">Latihan</button>
+      <button class="subtab" :class="{ active: tab === 'makan' }" @click="tab = 'makan'">Makan</button>
+    </div>
 
-    <section class="card">
-      <h3 class="card-title">Fase</h3>
-      <div v-for="f in faseList" :key="f.id" class="fase-item" :class="{ aktif: f.id === faseAktif?.id }">
-        <button class="fase-header" @click="toggleFase(f.id)">
-          <span>
-            <strong>{{ f.nama }}</strong>
-            <span class="text-sm"> — {{ f.tglMulai }} s.d. {{ f.tglSelesai }}</span>
-          </span>
-          <span class="chevron" :class="{ open: faseTerbuka[f.id] }">▾</span>
-        </button>
-        <div v-if="faseTerbuka[f.id]" class="fase-body">
-          <p class="text-sm">{{ f.fokusFase }}</p>
-          <p class="text-sm">Target BB: <strong>{{ f.targetBB }}</strong> kg</p>
-          <p v-if="f.checkpoint?.catatan" class="text-sm text-muted">{{ f.checkpoint.catatan }}</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="card">
-      <h3 class="card-title">Jadwal Mingguan</h3>
-      <div class="hari-tabs">
-        <button
-          v-for="h in hariList"
-          :key="h"
-          class="hari-tab"
-          :class="{ active: hariAktif === h }"
-          @click="hariAktif = h"
-        >{{ h.slice(0,3) }}</button>
-      </div>
-      <div v-if="jadwalHari" class="jadwal-detail">
-        <div v-if="jadwalHari.pagi" class="jadwal-row">
-          <span class="jadwal-time">Pagi</span>
-          <span>{{ jadwalHari.pagi }}</span>
-        </div>
-        <div v-if="jadwalHari.sore" class="jadwal-row">
-          <span class="jadwal-time">Sore</span>
-          <span>{{ jadwalHari.sore }}</span>
-        </div>
-        <p class="text-sm text-muted">{{ jadwalHari.fokus }}</p>
-        <p v-if="jadwalHari.catatan" class="text-sm text-warning">{{ jadwalHari.catatan }}</p>
-      </div>
-    </section>
-
-    <section class="card">
-      <h3 class="card-title">Aturan Makan</h3>
-      <p class="text-sm text-muted">{{ aturanMakan.polaMakan === 'ganjel-pagi' ? 'Ganjel pagi WAJIB' : 'IF Window: ' + aturanMakan.window }}</p>
-      <div v-for="slot in aturanMakan.slot" :key="slot.waktu" class="slot-row">
-        <span class="slot-time">{{ slot.waktu }}</span>
-        <div>
-          <strong>{{ slot.nama }}</strong>
-          <span class="text-sm"> — {{ slot.kkal }} kkal</span>
-        </div>
-      </div>
-      <div v-for="ct in aturanMakan.catatan" :key="ct" class="catatan-item">
-        <span class="bullet">•</span> {{ ct }}
-      </div>
-    </section>
-
-    <section class="card">
-      <h3 class="card-title">Starter 14 Hari</h3>
-      <div v-for="(item, i) in starter" :key="i" class="starter-item">
-        <span class="starter-num">{{ i + 1 }}</span>
-        <span>{{ item }}</span>
-      </div>
-    </section>
-
-    <section class="card">
-      <h3 class="card-title">Katalog Gerakan</h3>
-      <div class="filter-tabs">
-        <button
-          class="filter-tab"
-          :class="{ active: filterKategori === '' }"
-          @click="filterKategori = ''"
-        >Semua</button>
-        <button
-          v-for="k in kategoriList"
-          :key="k"
-          class="filter-tab"
-          :class="{ active: filterKategori === k }"
-          @click="filterKategori = k"
-        >{{ k }}</button>
-      </div>
-      <div class="gerakan-grid">
-        <KartuGerakan
-          v-for="g in gerakanFiltered"
-          :key="g.id"
-          :gerakan="g"
-          @ganti="gantiGerakan"
-        />
-      </div>
-    </section>
+    <PanelLatihan v-if="tab === 'latihan'" />
+    <PanelMakan v-else />
   </div>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
 import { useProfileStore } from '../stores/profile'
-import { getProgram, getProfil, getFase, getFaseAktif, getJadwal, getHariIni, getGerakanList, getGerakan } from '../data/program'
-import KartuGerakan from '../components/KartuGerakan.vue'
+import PanelLatihan from '../components/PanelLatihan.vue'
+import PanelMakan from '../components/PanelMakan.vue'
 
 const profile = useProfileStore()
-const prog = getProgram()
-
 const namaTampil = computed(() => profile.getNama(profile.profilAktif) || profile.profilAktif)
-const profil = computed(() => getProfil(profile.profilAktif))
-const faseList = computed(() => getFase(profile.profilAktif))
-const faseAktif = computed(() => getFaseAktif(profile.profilAktif))
 
-const hariList = ['minggu', 'senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu']
-const hariAktif = ref(getHariIni())
-
-const jadwalHari = computed(() => {
-  const j = getJadwal(profile.profilAktif)
-  return j[hariAktif.value] || null
-})
-
-const aturanMakan = computed(() => prog.aturanMakan[profile.profilAktif] || { slot: [], catatan: [] })
-const starter = computed(() => prog.starter14Hari[profile.profilAktif] || [])
-
-const faseTerbuka = ref({})
-function toggleFase(id) {
-  faseTerbuka.value[id] = !faseTerbuka.value[id]
-}
-
-const filterKategori = ref('')
-const semuaGerakan = computed(() => getGerakanList())
-const kategoriList = computed(() => {
-  const set = new Set(semuaGerakan.value.map(g => g.kategori).filter(Boolean))
-  return [...set]
-})
-const gerakanFiltered = computed(() => {
-  if (!filterKategori.value) return semuaGerakan.value
-  return semuaGerakan.value.filter(g => g.kategori === filterKategori.value)
-})
-
-function gantiGerakan(penggantiId) {
-  const g = getGerakan(penggantiId)
-  if (g) {
-    filterKategori.value = g.kategori
-  }
-}
+const tab = ref('latihan')
 </script>
 
 <style scoped>
-.page-title {
-  font-size: 1.5rem;
-}
+.page-title { font-size: 1.5rem; }
 .page-subtitle {
   font-size: .875rem;
   color: var(--text-muted);
   margin-bottom: 16px;
 }
-.card {
-  background: var(--card);
+.subtabs {
+  display: flex;
+  gap: 4px;
+  background: var(--surface);
+  padding: 4px;
   border-radius: var(--r-md);
-  padding: 16px;
-  margin-bottom: 12px;
-  box-shadow: var(--shadow-soft);
+  margin-bottom: 16px;
 }
-.card-title {
-  font-size: 1rem;
-  margin-bottom: 12px;
-}
-.info-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-.info-item {
-  display: flex;
-  flex-direction: column;
-}
-.info-label {
-  font-size: .75rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: .5px;
-}
-.info-val {
-  font-weight: 600;
-  font-size: .9375rem;
-}
-.fase-item {
-  border: 1px solid var(--line);
+.subtab {
+  flex: 1;
+  padding: 8px;
   border-radius: var(--r-sm);
-  margin-bottom: 8px;
-  overflow: hidden;
-}
-.fase-item.aktif {
-  border-color: var(--accent-soft);
-}
-.fase-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: 10px 12px;
-  text-align: left;
-  color: var(--text);
-}
-.chevron {
-  transition: transform .15s;
-  color: var(--text-muted);
-}
-.chevron.open {
-  transform: rotate(180deg);
-}
-.fase-body {
-  padding: 0 12px 12px;
-  border-top: 1px solid var(--line);
-  padding-top: 8px;
-}
-.hari-tabs {
-  display: flex;
-  gap: 4px;
-  margin-bottom: 12px;
-  overflow-x: auto;
-}
-.hari-tab {
-  padding: 6px 12px;
-  border-radius: var(--r-sm);
-  font-size: .8125rem;
-  color: var(--text-muted);
-  background: var(--bg);
-  white-space: nowrap;
-}
-.hari-tab.active {
-  background: var(--primary);
-  color: var(--on-primary);
-  font-weight: 600;
-}
-.jadwal-detail {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.jadwal-row {
-  display: flex;
-  gap: 12px;
-  align-items: baseline;
-}
-.jadwal-time {
-  font-weight: 600;
-  min-width: 48px;
-  font-size: .8125rem;
-  color: var(--primary);
-}
-.slot-row {
-  display: flex;
-  gap: 8px;
-  align-items: baseline;
-  padding: 6px 0;
-  border-bottom: 1px solid var(--line);
-}
-.slot-time {
-  font-size: .75rem;
-  color: var(--text-muted);
-  min-width: 72px;
-}
-.catatan-item {
-  font-size: .8125rem;
-  color: var(--text-muted);
-  padding: 4px 0;
-}
-.bullet {
-  color: var(--primary);
-  margin-right: 4px;
-}
-.starter-item {
-  display: flex;
-  gap: 8px;
   font-size: .875rem;
-  padding: 6px 0;
-  border-bottom: 1px solid var(--line);
-}
-.starter-num {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: var(--primary);
-  color: var(--on-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: .75rem;
   font-weight: 600;
-  flex-shrink: 0;
-}
-.text-sm { font-size: .8125rem; }
-.text-muted { color: var(--text-muted); }
-.text-warning { color: var(--danger); }
-.filter-tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  margin-bottom: 12px;
-}
-.filter-tab {
-  padding: 4px 10px;
-  border-radius: 99px;
-  font-size: .75rem;
-  background: var(--bg);
   color: var(--text-muted);
 }
-.filter-tab.active {
-  background: var(--accent);
-  color: var(--on-primary);
-  font-weight: 600;
-}
-.gerakan-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.subtab.active {
+  background: var(--card);
+  color: var(--primary);
+  box-shadow: var(--shadow-soft);
 }
 </style>
