@@ -32,22 +32,7 @@
     </div>
 
     <div class="kartu-body">
-      <div v-for="(step, i) in gerakan.langkah" :key="i" class="kartu-step">
-        <span class="step-num">{{ i + 1 }}</span>
-        <span>{{ step }}</span>
-      </div>
-      <div v-if="gerakan.cue?.length" class="kartu-cue">
-        <div v-for="(c, i) in gerakan.cue" :key="i" class="cue-item">{{ c }}</div>
-      </div>
-      <a
-        v-if="gerakan.media?.video"
-        :href="gerakan.media.video"
-        target="_blank"
-        rel="noopener"
-        class="btn-video"
-      >
-        Lihat video
-      </a>
+      <DetailGerakan :gerakan="gerakan" />
     </div>
   </div>
 </template>
@@ -56,6 +41,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useProfileStore } from '../stores/profile'
 import { getProgram, getGerakan } from '../data/program'
+import DetailGerakan from './DetailGerakan.vue'
 
 const props = defineProps({
   gerakan: { type: Object, required: true },
@@ -67,12 +53,12 @@ const profile = useProfileStore()
 const prog = getProgram()
 
 const fotoUrl = ref(null)
-
-const showRisiko = computed(() => {
-  return profile.profilAktif === 'paypey' && props.gerakan.risikoLutut
-})
-
 const aturanLutut = computed(() => prog.aturanLutut || {})
+
+// Risiko lutut hanya untuk profil yang diatur di data (paypey), berbasis flag gerakan.
+const showRisiko = computed(() => {
+  return aturanLutut.value.berlakuUntuk === profile.profilAktif && props.gerakan.risikoLutut
+})
 
 const gerakanPengganti = computed(() => {
   if (!props.gerakan.penggantiId) return null
@@ -84,11 +70,9 @@ onMounted(async () => {
   const base = import.meta.env.BASE_URL || './'
   try {
     const resp = await fetch(`${base}gerakan/${id}.jpg`)
-    if (resp.ok) {
-      fotoUrl.value = `${base}gerakan/${id}.jpg`
-    }
+    if (resp.ok) fotoUrl.value = `${base}gerakan/${id}.jpg`
   } catch {
-    // fallback
+    // fallback: placeholder tetap tampil
   }
 })
 </script>
@@ -178,45 +162,5 @@ onMounted(async () => {
 }
 .kartu-body {
   padding: 12px;
-}
-.kartu-step {
-  display: flex;
-  gap: 8px;
-  font-size: .8125rem;
-  padding: 4px 0;
-}
-.step-num {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--surface);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: .6875rem;
-  font-weight: 600;
-  flex-shrink: 0;
-}
-.kartu-cue {
-  margin-top: 8px;
-  padding: 8px;
-  background: var(--bg);
-  border-radius: var(--r-sm);
-}
-.cue-item {
-  font-size: .75rem;
-  color: var(--text-muted);
-  font-style: italic;
-}
-.btn-video {
-  display: inline-block;
-  margin-top: 8px;
-  padding: 6px 12px;
-  background: transparent;
-  border: 1px solid var(--primary);
-  color: var(--primary);
-  border-radius: var(--r-sm);
-  font-size: .75rem;
-  font-weight: 600;
 }
 </style>
