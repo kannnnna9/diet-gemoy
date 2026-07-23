@@ -74,7 +74,7 @@ onMounted(muat)
 
 <style scoped>
 .card {
-  background: #fff;
+  background: var(--card);
   border-radius: var(--r-md);
   padding: 16px;
   margin-bottom: 12px;
@@ -92,21 +92,21 @@ onMounted(muat)
 }
 .btn {
   padding: 8px 16px;
-  background: var(--c-terracotta);
-  color: #fff;
+  background: var(--primary);
+  color: var(--on-primary);
   border-radius: var(--r-sm);
   font-weight: 600;
   font-size: .875rem;
 }
 .privacy-note {
   font-size: .75rem;
-  color: var(--c-ink-soft);
+  color: var(--text-muted);
   font-style: italic;
   margin-bottom: 12px;
 }
 .loading {
   font-size: .875rem;
-  color: var(--c-ink-soft);
+  color: var(--text-muted);
   padding: 8px 0;
 }
 .gallery {
@@ -115,7 +115,7 @@ onMounted(muat)
   gap: 12px;
 }
 .gallery-item {
-  border: 1px solid var(--c-line);
+  border: 1px solid var(--line);
   border-radius: var(--r-sm);
   overflow: hidden;
 }
@@ -123,24 +123,24 @@ onMounted(muat)
   width: 100%;
   height: 200px;
   object-fit: cover;
-  background: var(--c-cream-2);
+  background: var(--surface);
 }
 .gallery-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 8px 12px;
-  background: var(--c-cream);
+  background: var(--bg);
 }
 .btn-del {
   font-size: .75rem;
-  color: var(--c-danger);
+  color: var(--danger);
   font-weight: 600;
 }
 .text-sm {
   font-size: .8125rem;
 }
 .text-muted {
-  color: var(--c-ink-soft);
+  color: var(--text-muted);
 }
 </style>

@@ -55,8 +55,8 @@ function navigate(to) {
   align-items: center;
   justify-content: space-between;
   padding: 12px 16px;
-  background: var(--c-cream-2);
-  border-bottom: 1px solid var(--c-line);
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
   position: sticky;
   top: 0;
   z-index: 10;
@@ -66,7 +66,7 @@ function navigate(to) {
   font-family: var(--font-head);
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--c-ink);
+  color: var(--text);
 }
 
 .shell-main {
@@ -75,8 +75,8 @@ function navigate(to) {
 
 .shell-nav {
   display: flex;
-  background: var(--c-cream-2);
-  border-top: 1px solid var(--c-line);
+  background: var(--surface);
+  border-top: 1px solid var(--line);
   position: fixed;
   bottom: 0;
   left: 0;
@@ -93,12 +93,12 @@ function navigate(to) {
   align-items: center;
   gap: 2px;
   padding: 6px 0;
-  color: var(--c-ink-soft);
+  color: var(--text-muted);
   transition: color .15s;
 }
 
 .nav-btn.active {
-  color: var(--c-terracotta);
+  color: var(--primary);
 }
 
 .nav-label {

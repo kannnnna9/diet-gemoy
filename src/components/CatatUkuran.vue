@@ -64,7 +64,7 @@ function simpan() {
 
 <style scoped>
 .card {
-  background: #fff;
+  background: var(--card);
   border-radius: var(--r-md);
   padding: 16px;
   margin-bottom: 12px;
@@ -87,21 +87,21 @@ function simpan() {
 }
 .field-label {
   font-size: .75rem;
-  color: var(--c-ink-soft);
+  color: var(--text-muted);
 }
 .input {
   padding: 8px 12px;
-  border: 1px solid var(--c-line);
+  border: 1px solid var(--line);
   border-radius: var(--r-sm);
-  background: var(--c-cream);
-  color: var(--c-ink);
+  background: var(--bg);
+  color: var(--text);
   font-size: .875rem;
   width: 100%;
 }
 .btn {
   padding: 8px 16px;
-  background: var(--c-terracotta);
-  color: #fff;
+  background: var(--primary);
+  color: var(--on-primary);
   border-radius: var(--r-sm);
   font-weight: 600;
   font-size: .875rem;
@@ -114,14 +114,14 @@ function simpan() {
   flex-wrap: wrap;
   gap: 8px;
   padding: 6px 0;
-  border-bottom: 1px solid var(--c-line);
+  border-bottom: 1px solid var(--line);
   font-size: .8125rem;
 }
 .riwayat-val {
   font-weight: 500;
 }
 .text-muted {
-  color: var(--c-ink-soft);
+  color: var(--text-muted);
 }
 .text-sm {
   font-size: .8125rem;

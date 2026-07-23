@@ -77,11 +77,11 @@ function barHeight(kg) {
 }
 .page-subtitle {
   font-size: .875rem;
-  color: var(--c-ink-soft);
+  color: var(--text-muted);
   margin-bottom: 16px;
 }
 .card {
-  background: #fff;
+  background: var(--card);
   border-radius: var(--r-md);
   padding: 16px;
   margin-bottom: 12px;
@@ -110,7 +110,7 @@ function barHeight(kg) {
 .bb-bar {
   width: 100%;
   max-width: 32px;
-  background: var(--c-terra-soft);
+  background: var(--primary-soft);
   border-radius: 4px 4px 0 0;
   min-height: 4px;
   transition: height .3s;
@@ -121,7 +121,7 @@ function barHeight(kg) {
 }
 .bb-date {
   font-size: .5625rem;
-  color: var(--c-ink-soft);
+  color: var(--text-muted);
 }
 .ukuran-list {
   display: flex;
@@ -134,15 +134,15 @@ function barHeight(kg) {
   gap: 8px;
   font-size: .8125rem;
   padding: 6px 0;
-  border-bottom: 1px solid var(--c-line);
+  border-bottom: 1px solid var(--line);
 }
 .ukuran-date {
   font-weight: 600;
   min-width: 48px;
 }
 .ukuran-val {
-  color: var(--c-ink-soft);
+  color: var(--text-muted);
 }
 .text-sm { font-size: .8125rem; }
-.text-muted { color: var(--c-ink-soft); }
+.text-muted { color: var(--text-muted); }
 </style>

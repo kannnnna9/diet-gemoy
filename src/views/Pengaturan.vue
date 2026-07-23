@@ -84,7 +84,7 @@ function simpanNama() {
 }
 
 .card {
-  background: #fff;
+  background: var(--card);
   border-radius: var(--r-md);
   padding: 16px;
   margin-bottom: 12px;
@@ -104,7 +104,7 @@ function simpanNama() {
 
 .field-label {
   font-size: .875rem;
-  color: var(--c-ink-soft);
+  color: var(--text-muted);
 }
 
 .field-row {
@@ -115,17 +115,17 @@ function simpanNama() {
 .input {
   flex: 1;
   padding: 8px 12px;
-  border: 1px solid var(--c-line);
+  border: 1px solid var(--line);
   border-radius: var(--r-sm);
-  background: var(--c-cream);
-  color: var(--c-ink);
+  background: var(--bg);
+  color: var(--text);
   font-size: .875rem;
 }
 
 .btn {
   padding: 8px 16px;
-  background: var(--c-terracotta);
-  color: #fff;
+  background: var(--primary);
+  color: var(--on-primary);
   border-radius: var(--r-sm);
   font-weight: 600;
   font-size: .875rem;
@@ -133,18 +133,18 @@ function simpanNama() {
 
 .btn-outline {
   padding: 8px 16px;
-  border: 1px solid var(--c-line);
+  border: 1px solid var(--line);
   border-radius: var(--r-sm);
-  color: var(--c-ink);
+  color: var(--text);
   font-size: .875rem;
   margin-right: 8px;
   margin-bottom: 8px;
 }
 
 .btn-outline.active {
-  border-color: var(--c-terracotta);
-  background: var(--c-terracotta);
-  color: #fff;
+  border-color: var(--primary);
+  background: var(--primary);
+  color: var(--on-primary);
 }
 
 .profil-list {
@@ -153,12 +153,12 @@ function simpanNama() {
 
 .text-sm {
   font-size: .8125rem;
-  color: var(--c-ink-soft);
+  color: var(--text-muted);
   margin-bottom: 4px;
 }
 
 .text-warning {
-  color: var(--c-danger);
+  color: var(--danger);
   margin-top: 8px;
 }
 
@@ -173,7 +173,7 @@ function simpanNama() {
 .toggle-row input {
   width: 44px;
   height: 24px;
-  accent-color: var(--c-terracotta);
+  accent-color: var(--primary);
 }
 
 .card-about {

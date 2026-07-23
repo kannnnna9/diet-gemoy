@@ -98,10 +98,10 @@ const kaloriTampil = computed(() => {
 }
 .greeting-date {
   font-size: .8125rem;
-  color: var(--c-ink-soft);
+  color: var(--text-muted);
 }
 .card {
-  background: #fff;
+  background: var(--card);
   border-radius: var(--r-md);
   padding: 16px;
   margin-bottom: 12px;
@@ -112,12 +112,12 @@ const kaloriTampil = computed(() => {
   margin-bottom: 8px;
 }
 .fase-card {
-  border-left: 4px solid var(--c-sage);
+  border-left: 4px solid var(--accent);
 }
 .fase-badge {
   display: inline-block;
-  background: var(--c-sage-soft);
-  color: #fff;
+  background: var(--accent-soft);
+  color: var(--on-primary);
   font-size: .75rem;
   font-weight: 600;
   padding: 2px 10px;
@@ -135,7 +135,7 @@ const kaloriTampil = computed(() => {
 }
 .ringkasan-label {
   font-size: .6875rem;
-  color: var(--c-ink-soft);
+  color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: .5px;
 }
@@ -152,17 +152,17 @@ const kaloriTampil = computed(() => {
 .jadwal-label {
   font-weight: 600;
   min-width: 44px;
-  color: var(--c-terracotta);
+  color: var(--primary);
   font-size: .8125rem;
 }
 .text-sm {
   font-size: .8125rem;
 }
 .text-muted {
-  color: var(--c-ink-soft);
+  color: var(--text-muted);
 }
 .text-catatan {
-  color: var(--c-danger);
+  color: var(--danger);
   font-weight: 600;
   margin-top: 8px;
 }
@@ -176,7 +176,7 @@ const kaloriTampil = computed(() => {
 .toggle-row input {
   width: 44px;
   height: 24px;
-  accent-color: var(--c-terracotta);
+  accent-color: var(--primary);
 }
 .toggle-label {
   font-weight: 600;
@@ -184,8 +184,8 @@ const kaloriTampil = computed(() => {
 .haid-banner {
   margin-top: 12px;
   padding: 12px;
-  background: #fef5e7;
+  background: var(--warn-bg);
   border-radius: var(--r-sm);
-  border: 1px solid #f0d6b5;
+  border: 1px solid var(--warn-line);
 }
 </style>

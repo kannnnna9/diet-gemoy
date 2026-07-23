@@ -53,8 +53,8 @@ function pilih(id) {
   gap: 4px;
   padding: 4px 10px;
   border-radius: var(--r-sm);
-  background: var(--c-cream);
-  color: var(--c-ink);
+  background: var(--bg);
+  color: var(--text);
   font-weight: 600;
   font-size: .875rem;
 }
@@ -78,7 +78,7 @@ function pilih(id) {
 }
 
 .dropdown-menu {
-  background: #fff;
+  background: var(--card);
   border-radius: var(--r-md);
   box-shadow: var(--shadow-soft), 0 4px 16px rgba(58,52,44,.12);
   overflow: hidden;
@@ -91,16 +91,16 @@ function pilih(id) {
   padding: 10px 16px;
   text-align: left;
   font-size: .875rem;
-  color: var(--c-ink);
+  color: var(--text);
 }
 
 .dropdown-item.active {
-  background: var(--c-terra-soft);
-  color: #fff;
+  background: var(--primary-soft);
+  color: var(--on-primary);
   font-weight: 600;
 }
 
 .dropdown-item:not(:last-child) {
-  border-bottom: 1px solid var(--c-line);
+  border-bottom: 1px solid var(--line);
 }
 </style>

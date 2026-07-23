@@ -95,14 +95,14 @@ onMounted(async () => {
 
 <style scoped>
 .kartu {
-  background: #fff;
+  background: var(--card);
   border-radius: var(--r-md);
   overflow: hidden;
   box-shadow: var(--shadow-soft);
-  border: 1px solid var(--c-line);
+  border: 1px solid var(--line);
 }
 .kartu.risiko {
-  border-color: var(--c-danger);
+  border-color: var(--danger);
 }
 .kartu-header {
   display: flex;
@@ -117,33 +117,33 @@ onMounted(async () => {
   font-size: .6875rem;
   text-transform: uppercase;
   letter-spacing: .5px;
-  color: var(--c-ink-soft);
-  background: var(--c-cream);
+  color: var(--text-muted);
+  background: var(--bg);
   padding: 2px 8px;
   border-radius: 99px;
 }
 .kartu-risiko {
   margin: 8px 12px 0;
   padding: 10px;
-  background: #fef5e7;
+  background: var(--warn-bg);
   border-radius: var(--r-sm);
-  border: 1px solid #f0d6b5;
+  border: 1px solid var(--warn-line);
 }
 .risiko-badge {
   font-size: .75rem;
   font-weight: 700;
-  color: var(--c-danger);
+  color: var(--danger);
 }
 .risiko-note {
   font-size: .75rem;
-  color: var(--c-ink-soft);
+  color: var(--text-muted);
   margin-top: 4px;
 }
 .btn-ganti {
   margin-top: 8px;
   padding: 6px 12px;
-  background: var(--c-terracotta);
-  color: #fff;
+  background: var(--primary);
+  color: var(--on-primary);
   border-radius: var(--r-sm);
   font-size: .75rem;
   font-weight: 600;
@@ -157,7 +157,7 @@ onMounted(async () => {
   width: 100%;
   height: 180px;
   object-fit: cover;
-  background: var(--c-cream-2);
+  background: var(--surface);
 }
 .kartu-placeholder {
   height: 100px;
@@ -165,7 +165,7 @@ onMounted(async () => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: var(--c-cream-2);
+  background: var(--surface);
   gap: 4px;
 }
 .placeholder-icon {
@@ -174,7 +174,7 @@ onMounted(async () => {
 }
 .placeholder-text {
   font-size: .75rem;
-  color: var(--c-ink-soft);
+  color: var(--text-muted);
 }
 .kartu-body {
   padding: 12px;
@@ -189,7 +189,7 @@ onMounted(async () => {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: var(--c-cream-2);
+  background: var(--surface);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -200,12 +200,12 @@ onMounted(async () => {
 .kartu-cue {
   margin-top: 8px;
   padding: 8px;
-  background: var(--c-cream);
+  background: var(--bg);
   border-radius: var(--r-sm);
 }
 .cue-item {
   font-size: .75rem;
-  color: var(--c-ink-soft);
+  color: var(--text-muted);
   font-style: italic;
 }
 .btn-video {
@@ -213,8 +213,8 @@ onMounted(async () => {
   margin-top: 8px;
   padding: 6px 12px;
   background: transparent;
-  border: 1px solid var(--c-terracotta);
-  color: var(--c-terracotta);
+  border: 1px solid var(--primary);
+  color: var(--primary);
   border-radius: var(--r-sm);
   font-size: .75rem;
   font-weight: 600;

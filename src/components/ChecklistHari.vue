@@ -59,7 +59,7 @@ function toggle(id) {
 
 <style scoped>
 .card {
-  background: #fff;
+  background: var(--card);
   border-radius: var(--r-md);
   padding: 16px;
   margin-bottom: 12px;
@@ -77,14 +77,14 @@ function toggle(id) {
 .checklist-progress {
   font-size: .8125rem;
   font-weight: 600;
-  color: var(--c-sage);
+  color: var(--accent);
 }
 .checklist-item {
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 8px 0;
-  border-bottom: 1px solid var(--c-line);
+  border-bottom: 1px solid var(--line);
 }
 .checklist-item:last-child {
   border-bottom: none;
@@ -93,7 +93,7 @@ function toggle(id) {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  border: 2px solid var(--c-line);
+  border: 2px solid var(--line);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -102,20 +102,20 @@ function toggle(id) {
   transition: all .15s;
 }
 .check-btn.done {
-  background: var(--c-sage);
-  border-color: var(--c-sage);
+  background: var(--accent);
+  border-color: var(--accent);
 }
 .check-icon {
-  color: #fff;
+  color: var(--on-primary);
   font-size: .75rem;
   font-weight: 700;
 }
 .check-label {
   font-size: .875rem;
-  color: var(--c-ink);
+  color: var(--text);
 }
 .check-label.done {
-  color: var(--c-ink-soft);
+  color: var(--text-muted);
   text-decoration: line-through;
 }
 </style>

@@ -15,8 +15,8 @@ html {
 
 body {
   font-family: var(--font-body);
-  background: var(--c-cream);
-  color: var(--c-ink);
+  background: var(--bg);
+  color: var(--text);
   line-height: 1.5;
   min-height: 100dvh;
   -webkit-font-smoothing: antialiased;
@@ -42,7 +42,7 @@ input, textarea, select {
 }
 
 a {
-  color: var(--c-terracotta);
+  color: var(--primary);
   text-decoration: none;
 }
 
