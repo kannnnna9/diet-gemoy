@@ -53,6 +53,8 @@
       </div>
     </div>
 
+    <StarterCard />
+
     <ChecklistHari />
   </div>
 </template>
@@ -62,6 +64,7 @@ import { computed } from 'vue'
 import { useProfileStore } from '../stores/profile'
 import { getProfil, getFaseAktif, getJadwalHari, getHariIni, getProgram } from '../data/program'
 import ChecklistHari from '../components/ChecklistHari.vue'
+import StarterCard from '../components/StarterCard.vue'
 
 const profile = useProfileStore()
 const prog = getProgram()
