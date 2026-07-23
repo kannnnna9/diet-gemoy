@@ -1,18 +1,52 @@
 :root {
-  --c-cream:      #F7F1E6;
-  --c-cream-2:    #EFE6D6;
-  --c-terracotta: #C96F4A;
-  --c-terra-soft: #E0A183;
-  --c-sage:       #7C8B6B;
-  --c-sage-soft:  #A9B79A;
-  --c-ink:        #3A342C;
-  --c-ink-soft:   #6B6357;
-  --c-line:       #DCCFBB;
-  --c-danger:     #B5533F;
+  /* ===== Bersama (tidak ikut tema) ===== */
+  --card: #FFFFFF;          /* latar kartu */
+  --on-primary: #FFFFFF;    /* teks/ikon di atas warna --primary/--accent */
+  --danger: #B5533F;        /* teks error/peringatan */
+  --warn-bg: #FBEEDD;       /* latar kotak "perhatian" (hangat) */
+  --warn-line: #EFD6B0;     /* garis kotak "perhatian" */
+
   --r-sm: 8px;
   --r-md: 14px;
   --r-lg: 22px;
-  --shadow-soft: 0 2px 8px rgba(58,52,44,.08);
+  --shadow-soft: 0 2px 8px rgba(58, 52, 44, .08);
   --font-head: 'Fraunces', Georgia, serif;
   --font-body: 'Quicksand', system-ui, sans-serif;
+
+  /* ===== Default (mirror paypey) — dipakai sebelum data-theme diset ===== */
+  --bg: #F4F2EA;
+  --surface: #E9E6D8;
+  --primary: #5F6B3E;
+  --primary-soft: #AEB995;
+  --accent: #5F6B3E;
+  --accent-soft: #BCC0AB;
+  --text: #2E3320;
+  --text-muted: #5A6249;
+  --line: #DDD8C6;
+}
+
+/* ===== paypey — "Matcha" (hijau sage hangat) ===== */
+[data-theme="paypey"] {
+  --bg: #F4F2EA;
+  --surface: #E9E6D8;
+  --primary: #5F6B3E;       /* on-primary putih 5.74:1 */
+  --primary-soft: #AEB995;  /* aksen lembut, non-teks */
+  --accent: #5F6B3E;        /* teks di atas card = 5.74:1 */
+  --accent-soft: #BCC0AB;
+  --text: #2E3320;          /* 11.6:1 di atas bg */
+  --text-muted: #5A6249;    /* 5.7:1 di atas bg */
+  --line: #DDD8C6;
+}
+
+/* ===== ffazeyall — "Cranberry" (merah maroon hangat) ===== */
+[data-theme="ffazeyall"] {
+  --bg: #FBF1EC;
+  --surface: #F3E4DD;
+  --primary: #7A2233;       /* on-primary putih 9.98:1 */
+  --primary-soft: #C9A99A;
+  --accent: #64343C;        /* plum, teks di atas card ~7:1 */
+  --accent-soft: #D8C0B6;
+  --text: #3A2126;          /* 13.3:1 di atas bg */
+  --text-muted: #6E4C50;    /* 6.7:1 di atas bg */
+  --line: #E7D4CB;
 }
