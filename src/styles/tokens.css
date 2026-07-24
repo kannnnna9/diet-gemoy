@@ -5,6 +5,11 @@
   --danger: #B5533F;        /* teks error/peringatan */
   --warn-bg: #FBEEDD;       /* latar kotak "perhatian" (hangat) */
   --warn-line: #EFD6B0;     /* garis kotak "perhatian" */
+  /* Warna kelompok makanan — semantik, sama di semua profil */
+  --food-protein: #5F6B3E;
+  --food-sayur:   #A9B18C;
+  --food-karbo:   #D9A15B;
+  --food-lemak:   #C6785A;
 
   --r-sm: 8px;
   --r-md: 14px;

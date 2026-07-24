@@ -48,3 +48,11 @@ export function getHariIni() {
   const day = new Date().getDay()
   return hariNames[day]
 }
+
+const BULAN_ID = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des']
+
+// Parse manual dari string ISO "YYYY-MM-DD" — hindari isu timezone new Date(iso).
+export function formatTanggalId(iso) {
+  const [y, m, d] = iso.split('-')
+  return `${parseInt(d, 10)} ${BULAN_ID[parseInt(m, 10) - 1]} ${y}`
+}
