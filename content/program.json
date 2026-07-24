@@ -309,7 +309,12 @@
         { "waktu": "19.00–20.30", "nama": "Makan malam", "kkal": "500–650", "catatan": "Protein tinggi." },
         { "waktu": "Opsional", "nama": "Ngemil malam", "kkal": "max 150", "catatan": "Protein/serat · air dulu 10 mnt." }
       ],
-      "piring": "Protein 1 telapak · sayur 2 genggam · nasi 1 genggam · minyak 1 jempol / max 1 sdm.",
+      "piring": [
+        { "nama": "Protein", "takaran": "1 telapak", "grup": "protein", "proporsi": 70 },
+        { "nama": "Sayur", "takaran": "2 genggam", "grup": "sayur", "proporsi": 90 },
+        { "nama": "Nasi", "takaran": "1 genggam", "grup": "karbo", "proporsi": 45 },
+        { "nama": "Minyak", "takaran": "1 jempol / max 1 sdm", "grup": "lemak", "proporsi": 20 }
+      ],
       "catatan": [
         "Terong balado 3–4×/minggu OK · minyak max 1 sdm · + telur/tempe/ayam.",
         "Ganjel pick: roti+telur · pisang+telur · nasi sisa+telur · oatmeal+telur.",
@@ -319,11 +324,11 @@
       ],
       "rotasiContoh": {
         "_sumber": "dokumen",
-        "isi": [
-          "Siang: nasi 100–120 g + telur 2 / tempe / ayam 100 g + sayur (terong balado minyak 1 sdm OK).",
-          "Malam: mirip siang, karbo sedikit lebih kecil jika kurang gerak.",
-          "Mie: rebus + telur + sayur, max 2×/minggu.",
-          "Nasi goreng diet: nasi 100 g + 2 telur + sawi + minyak 1 sdt."
+          "isi": [
+          { "label": "Siang", "isi": "Nasi 100–120 g + telur 2 / tempe / ayam 100 g + sayur (terong balado minyak 1 sdm OK)." },
+          { "label": "Malam", "isi": "Mirip siang, karbo sedikit lebih kecil jika kurang gerak." },
+          { "label": "Mie", "isi": "Rebus + telur + sayur, max 2×/minggu." },
+          { "label": "Nasi goreng diet", "isi": "Nasi 100 g + 2 telur + sawi + minyak 1 sdt." }
         ]
       },
       "menuMingguan": {
@@ -349,7 +354,12 @@
         { "waktu": "18.00–19.00", "nama": "Makan 2 protein tinggi", "kkal": "500–600", "catatan": null },
         { "waktu": "Setelah 19.00", "nama": "Air / teh hijau tawar", "kkal": "0", "catatan": null }
       ],
-      "piring": "Protein 1–2 telapak · sayur 2 genggam · karbo 1 genggam · lemak 1 jempol.",
+      "piring": [
+        { "nama": "Protein", "takaran": "1–2 telapak", "grup": "protein", "proporsi": 78 },
+        { "nama": "Sayur", "takaran": "2 genggam", "grup": "sayur", "proporsi": 90 },
+        { "nama": "Karbo", "takaran": "1 genggam", "grup": "karbo", "proporsi": 45 },
+        { "nama": "Lemak", "takaran": "1 jempol", "grup": "lemak", "proporsi": 20 }
+      ],
       "catatan": [
         "Protein tanpa telur rebus/setengah matang: omelet/dadar matang · ayam · ikan · tahu-tempe · daging giling · yogurt plain · susu · edamame · protein powder opsional.",
         "Favorit terkontrol 1–2×/minggu: bakso (kuah, 5–7 butir, banyak sawi, skip kerupuk berlebih), mie ayam (mie ½–¾, ayam banyak, minyak disisihkan), siomay (kukus 4–6 + tahu, kacang 1 sdm, lalap).",
@@ -366,10 +376,10 @@
       ],
       "rotasiContoh": {
         "_sumber": "dokumen",
-        "isi": [
-          "Makan 1: Nasi 90–100 g + ayam 120 g + sawi · atau omelet 2 telur + sayur + roti/nasi kecil · atau mie ayam diet.",
-          "Snack: Yogurt+pisang · edamame · buah+susu · yogurt+oat.",
-          "Makan 2: Tahu tempe + sayur + nasi 70–80 g · ikan bakar + lalap · sup ayam + tahu · pepes + nasi."
+          "isi": [
+          { "label": "Makan 1", "isi": "Nasi 90–100 g + ayam 120 g + sawi · atau omelet 2 telur + sayur + roti/nasi kecil · atau mie ayam diet." },
+          { "label": "Snack", "isi": "Yogurt+pisang · edamame · buah+susu · yogurt+oat." },
+          { "label": "Makan 2", "isi": "Tahu tempe + sayur + nasi 70–80 g · ikan bakar + lalap · sup ayam + tahu · pepes + nasi." }
         ]
       },
       "menuMingguan": {
