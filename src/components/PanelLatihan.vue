@@ -24,19 +24,26 @@
 
     <section class="card">
       <h3 class="card-title">Fase</h3>
-      <div v-for="f in faseList" :key="f.id" class="fase-item" :class="{ aktif: f.id === faseAktif?.id }">
-        <button class="fase-header" @click="toggleFase(f.id)">
-          <span>
-            <strong>{{ f.nama }}</strong>
-            <span class="text-sm"> — {{ f.tglMulai }} s.d. {{ f.tglSelesai }}</span>
-          </span>
-          <span class="chevron" :class="{ open: faseTerbuka[f.id] }">▾</span>
+      <div class="stepper">
+        <button
+          v-for="f in faseStepper"
+          :key="f.id"
+          class="step"
+          :class="[f.status, { terpilih: f.id === faseTerpilih }]"
+          :aria-current="f.status === 'aktif' ? 'step' : undefined"
+          @click="faseTerpilih = f.id"
+        >
+          <span class="dot">{{ f.nomor }}</span>
+          <span class="step-lbl">{{ f.labelPendek }}</span>
         </button>
-        <div v-if="faseTerbuka[f.id]" class="fase-body">
-          <p class="text-sm">{{ f.fokusFase }}</p>
-          <p class="text-sm">Target BB: <strong>{{ f.targetBB }}</strong> kg</p>
-          <p v-if="f.checkpoint?.catatan" class="text-sm text-muted">{{ f.checkpoint.catatan }}</p>
-        </div>
+      </div>
+
+      <div v-if="faseDetail" class="fase-detail">
+        <div class="fase-nama">{{ faseDetail.nama }}</div>
+        <div class="fase-tgl">{{ formatTanggalId(faseDetail.tglMulai) }} – {{ formatTanggalId(faseDetail.tglSelesai) }}</div>
+        <p class="text-sm fase-fokus">{{ faseDetail.fokusFase }}</p>
+        <p class="text-sm">Target BB: <strong>{{ faseDetail.targetBB }}</strong> kg</p>
+        <p v-if="faseDetail.checkpoint?.catatan" class="text-sm text-muted">{{ faseDetail.checkpoint.catatan }}</p>
       </div>
     </section>
 
@@ -99,16 +106,46 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useProfileStore } from '../stores/profile'
-import { getProfil, getFase, getFaseAktif, getJadwal, getHariIni, getSesi } from '../data/program'
+import { getProfil, getFase, getFaseAktif, getJadwal, getHariIni, getSesi, formatTanggalId } from '../data/program'
 import ItemLatihan from './ItemLatihan.vue'
 
 const profile = useProfileStore()
 
 const profil = computed(() => getProfil(profile.profilAktif))
 const faseList = computed(() => getFase(profile.profilAktif))
-const faseAktif = computed(() => getFaseAktif(profile.profilAktif))
+
+function statusFase(f, today) {
+  if (today > f.tglSelesai) return 'lewat'
+  if (today >= f.tglMulai) return 'aktif'
+  return 'nanti'
+}
+
+const faseStepper = computed(() => {
+  const today = new Date().toISOString().slice(0, 10)
+  return faseList.value.map((f, i) => ({
+    ...f,
+    nomor: i + 1,
+    status: statusFase(f, today),
+    labelPendek: f.nama.includes('—') ? f.nama.split('—')[1].trim() : `Fase ${i + 1}`,
+  }))
+})
+
+const faseTerpilih = ref(null)
+
+// Default = fase aktif; kalau belum ada fase aktif (mis. sebelum program mulai) → fase pertama.
+const idFaseDefault = computed(() => {
+  const aktif = getFaseAktif(profile.profilAktif)
+  return aktif?.id || faseList.value[0]?.id || null
+})
+
+// Reset pilihan saat profil ganti (default ikut profil baru).
+watch(idFaseDefault, (id) => { faseTerpilih.value = id }, { immediate: true })
+
+const faseDetail = computed(() =>
+  faseStepper.value.find(f => f.id === faseTerpilih.value) || null
+)
 
 const hariList = ['minggu', 'senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu']
 const hariAktif = ref(getHariIni())
@@ -124,10 +161,6 @@ const sesiHari = computed(() => {
   return ids.map(id => getSesi(id)).filter(Boolean)
 })
 
-const faseTerbuka = ref({})
-function toggleFase(id) {
-  faseTerbuka.value[id] = !faseTerbuka.value[id]
-}
 </script>
 
 <style scoped>
@@ -148,29 +181,68 @@ function toggleFase(id) {
   letter-spacing: .5px;
 }
 .info-val { font-weight: 600; font-size: .9375rem; }
-.fase-item {
-  border: 1px solid var(--line);
-  border-radius: var(--r-sm);
-  margin-bottom: 8px;
-  overflow: hidden;
+.stepper { display: flex; margin-bottom: 14px; }
+.step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  position: relative;
+  background: none;
+  padding: 0;
 }
-.fase-item.aktif { border-color: var(--accent-soft); }
-.fase-header {
+.step .dot {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  font-weight: 700;
+  font-size: .85rem;
+  background: var(--surface);
+  color: var(--text-muted);
+  z-index: 1;
+  transition: box-shadow .15s;
+}
+.step-lbl {
+  font-size: .62rem;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.2;
+}
+/* garis penghubung ke kanan tiap bulatan */
+.step::after {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 50%;
   width: 100%;
-  padding: 10px 12px;
-  text-align: left;
-  color: var(--text);
+  height: 3px;
+  background: var(--line);
+  z-index: 0;
 }
-.chevron { transition: transform .15s; color: var(--text-muted); }
-.chevron.open { transform: rotate(180deg); }
-.fase-body {
-  padding: 0 12px 12px;
-  border-top: 1px solid var(--line);
-  padding-top: 8px;
+.step:last-child::after { display: none; }
+/* status temporal */
+.step.lewat .dot { background: var(--accent-soft); color: var(--on-primary); }
+.step.lewat::after { background: var(--accent-soft); }
+.step.aktif .dot {
+  background: var(--primary);
+  color: var(--on-primary);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 20%, transparent);
 }
+/* seleksi (independen dari status) */
+.step.terpilih .step-lbl { color: var(--primary); font-weight: 700; }
+
+.fase-detail {
+  background: var(--bg);
+  border-radius: var(--r-sm);
+  padding: 12px;
+}
+.fase-nama { font-weight: 700; font-size: .95rem; }
+.fase-tgl { font-size: .72rem; color: var(--text-muted); margin: 2px 0 8px; }
+.fase-fokus { margin-bottom: 4px; }
 .hari-tabs { display: flex; gap: 4px; margin-bottom: 12px; overflow-x: auto; }
 .hari-tab {
   padding: 6px 12px;
