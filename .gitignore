@@ -5,3 +5,8 @@ dist
 docs/
 kerangka/
 .superpowers/
+AGENTS.md
+OPEN-QUESTIONS.md
+
+# Artefak eksekutor lokal
+.opencode-exec.log
