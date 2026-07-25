@@ -2,6 +2,13 @@
 
 Format mengikuti [Keep a Changelog](https://keepachangelog.com/) & [SemVer](https://semver.org/).
 
+## [1.0.2] — 2026-07-25
+
+### Ditambahkan
+- Kartu reminder "Sekarang waktunya" di Beranda: tampil dalam 90 menit setelah jam slot (ganjel, IF, snack, latihan, dst) + tombol nudge "Ingatkan aku" untuk pasang alarm HP sendiri.
+- Tombol "Export ke Kalender (.ics)" di Pengaturan: unduh file jadwal jam-ketat berulang → impor ke Google Kalender, notif ditangani Google. Nol login tambahan.
+- Blok data `slotHarian` per profil (jam penting terstruktur, diambil dari dokumen program).
+
 ## [1.0.1] — 2026-07-25
 
 ### Diperbaiki
