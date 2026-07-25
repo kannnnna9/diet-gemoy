@@ -518,5 +518,31 @@
   "motivasi": {
     "paypey": "Konsisten di 6 hari kerja > sempurna di kertas · Sabtu untuk pulih, bukan pesta latihan. Target menang: 4 hari terisi/minggu sudah bagus; 6/6 tidak wajib. Tidur 21–22.30 = latihan tersembunyi paling penting.",
     "ffazeyall": "6 pagi jalan di hari kerja mengalahkan 1 weekend sempurna di kertas · Sabtu untuk pulih & meal prep · Cepat yang aman > brutal yang rebound. 1 hari jelek ≠ restart dari nol."
+  },
+
+  "slotHarian": {
+    "_sumber": "6 PDF kerangka (PROGRAM/JADWAL/LEMBAR). Jam diambil dari blok 'Aturan makan' & ringkasan jadwal pagi/sore. ulang: harian-kerja = Min–Jum (kerja), harian-libur = Sabtu, harian = setiap hari.",
+    "_catatan": "acuteReminder & .ics hanya memakai slot dengan jam tegas; slot 'Opsional' tidak dimasukkan.",
+
+    "paypey": [
+      { "id": "ganjel", "label": "Ganjel pagi (wajib)", "jam": "04:50", "ulang": "harian-kerja", "catatan": "Makan sebelum berangkat kerja, jangan skip — termasuk hari Minggu kerja. Roti+telur / pisang+telur / oatmeal+telur." },
+      { "id": "makan-siang", "label": "Makan siang utama", "jam": "12:00", "ulang": "harian-kerja", "catatan": "Protein + sayur + nasi. Window 10.30–14.30." },
+      { "id": "snack-sore", "label": "Snack post-kerja / pre-latihan", "jam": "17:00", "ulang": "harian-kerja", "catatan": "Bekal strength sore. Telur rebus / pisang / yogurt / kacang." },
+      { "id": "latihan", "label": "Latihan sore", "jam": "16:00", "ulang": "harian-kerja", "catatan": "Full body (Sen/Rab/Jum) atau jalan/core (Min/Sel/Kam). Daftar lihat jadwalMingguan." },
+      { "id": "makan-malam", "label": "Makan malam", "jam": "19:30", "ulang": "harian-kerja", "catatan": "Protein tinggi, selesai ≤20.30." },
+      { "id": "tidur", "label": "Tidur", "jam": "22:00", "ulang": "harian", "catatan": "Latihan tersembunyi paling penting, target 21.00–22.30." },
+      { "id": "timbang-sabtu", "label": "Timbang + ukur pinggang", "jam": "06:30", "ulang": "harian-libur", "catatan": "Sabtu pagi, sebelum makan. Catat BB & pinggang." }
+    ],
+
+    "ffazeyall": [
+      { "id": "jalan-pagi", "label": "Jalan pagi (puasa)", "jam": "06:00", "ulang": "harian-kerja", "catatan": "Boleh puasa + air/teh. Kompensasi duduk 6 hari kerja. 30–45 mnt." },
+      { "id": "if-mulai", "label": "Mulai IF (buka window)", "jam": "11:00", "ulang": "harian", "catatan": "Break-fast protein tinggi (makan 1 terbesar). IF 11.00–19.00." },
+      { "id": "snack-sore", "label": "Snack sore (wajib)", "jam": "15:30", "ulang": "harian-kerja", "catatan": "Wajib tiap hari kerja, cegah ngemil malam + bekal strength. Yogurt+pisang / edamame / buah+susu." },
+      { "id": "latihan", "label": "Latihan sore", "jam": "16:30", "ulang": "harian-kerja", "catatan": "Lower/Upper/Core/Full rota (Min–Jum). Lihat jadwalMingguan." },
+      { "id": "makan-malam", "label": "Makan 2 (protein tinggi)", "jam": "18:30", "ulang": "harian", "catatan": "Tutup window protein. Window 18.00–19.00." },
+      { "id": "if-selesai", "label": "Tutup window (IF selesai)", "jam": "19:00", "ulang": "harian", "catatan": "Setelah ini hanya air/teh hijau tawar. Lapar → air 300 ml + sikat gigi, tunggu 15 mnt." },
+      { "id": "tidur", "label": "Tidur", "jam": "22:30", "ulang": "harian", "catatan": "Target 22.00–23.00." },
+      { "id": "timbang-sabtu", "label": "Timbang + cm/foto bulanan", "jam": "06:30", "ulang": "harian-libur", "catatan": "Sabtu pagi 1×/minggu. Cm+foto 1×/bulan." }
+    ]
   }
 }

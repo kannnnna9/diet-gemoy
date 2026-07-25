@@ -4,6 +4,10 @@ export function getProgram() {
   return programData
 }
 
+export function getSlotHarian(profilId) {
+  return programData.slotHarian?.[profilId] || []
+}
+
 export function getProfil(profilId) {
   return programData.profil.find(p => p.id === profilId) || null
 }
