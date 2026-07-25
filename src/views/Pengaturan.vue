@@ -45,6 +45,12 @@
       </p>
     </section>
 
+    <section class="card">
+      <h3 class="card-title">Jadwal ke Kalender</h3>
+      <p class="text-sm">Unduh file kalender berisi jam-jam penting (ganjel, IF, snack, latihan, tidur). Buka file → masuk Google Kalender, notif ditangani Google.</p>
+      <button class="btn export-btn" @click="exportKalender">Export ke Kalender (.ics)</button>
+    </section>
+
     <section class="card card-about">
       <h3 class="card-title">Tentang</h3>
       <p class="text-sm">Diet Gemoy — companion program diet pribadi.</p>
@@ -56,6 +62,8 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useProfileStore } from '../stores/profile'
+import { getSlotHarian } from '../data/program'
+import { downloadIcs } from '../lib/ics'
 
 const profile = useProfileStore()
 const namaBaru = ref('')
@@ -68,6 +76,10 @@ const profilList = [
 const namaTampil = computed(() => {
   return profile.getNama(profile.profilAktif) || profile.profilAktif
 })
+
+function exportKalender() {
+  downloadIcs(getSlotHarian(profile.profilAktif), profile.profilAktif)
+}
 
 function simpanNama() {
   if (namaBaru.value.trim()) {
@@ -175,6 +187,8 @@ function simpanNama() {
   height: 24px;
   accent-color: var(--primary);
 }
+
+.export-btn { margin-top: 10px; font-weight: 600; }
 
 .card-about {
   margin-top: 24px;
