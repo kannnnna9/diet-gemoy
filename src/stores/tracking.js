@@ -8,14 +8,28 @@ export const useTrackingStore = defineStore('tracking', () => {
 
   const pid = () => profile.profilAktif
 
+  // Cadangan reaktif checklist: key `${pid}:${tanggal}` -> { itemId: bool }.
+  // Tampilan baca dari sini (bukan localStorage langsung) supaya klik langsung terlihat.
+  const checklists = ref({})
+
+  const keyFor = (tanggal) => `${pid()}:${tanggal}`
+
+  function ensureChecklist(tanggal) {
+    const k = keyFor(tanggal)
+    if (!(k in checklists.value)) {
+      checklists.value[k] = get(pid(), `checklist:${tanggal}`, {})
+    }
+  }
+
   function getChecklist(tanggal) {
-    return get(pid(), `checklist:${tanggal}`, {})
+    return checklists.value[keyFor(tanggal)] || {}
   }
 
   function setChecklistItem(tanggal, key, val) {
-    const cl = getChecklist(tanggal)
-    cl[key] = val
-    set(pid(), `checklist:${tanggal}`, cl)
+    ensureChecklist(tanggal)
+    const k = keyFor(tanggal)
+    checklists.value[k] = { ...checklists.value[k], [key]: val }
+    set(pid(), `checklist:${tanggal}`, checklists.value[k])
   }
 
   function getRiwayatBB() {
@@ -56,6 +70,7 @@ export const useTrackingStore = defineStore('tracking', () => {
   }
 
   return {
+    ensureChecklist,
     getChecklist,
     setChecklistItem,
     getRiwayatBB,

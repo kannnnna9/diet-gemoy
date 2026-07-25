@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 import { useProfileStore } from '../stores/profile'
 import { useTrackingStore } from '../stores/tracking'
 
@@ -26,6 +26,9 @@ const profile = useProfileStore()
 const tracking = useTrackingStore()
 
 const hari = new Date().toISOString().slice(0, 10)
+
+tracking.ensureChecklist(hari)
+watch(() => profile.profilAktif, () => tracking.ensureChecklist(hari))
 
 const checklist = computed(() => tracking.getChecklist(hari))
 

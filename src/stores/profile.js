@@ -20,11 +20,16 @@ export const useProfileStore = defineStore('profile', () => {
     namaOverride.value[profilId] = nama
   }
 
-  const modeHaid = computed(() => {
-    return getRaw(profilAktif.value, 'modeHaid', 'false') === 'true'
+  // Cadangan reaktif mode haid per profil supaya toggle langsung terlihat (tanpa refresh).
+  const haidMap = ref({
+    paypey: getRaw('paypey', 'modeHaid', 'false') === 'true',
+    ffazeyall: getRaw('ffazeyall', 'modeHaid', 'false') === 'true',
   })
 
+  const modeHaid = computed(() => !!haidMap.value[profilAktif.value])
+
   function setModeHaid(val) {
+    haidMap.value[profilAktif.value] = !!val
     setRaw(profilAktif.value, 'modeHaid', val ? 'true' : 'false')
   }
 

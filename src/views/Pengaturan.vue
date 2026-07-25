@@ -48,7 +48,7 @@
     <section class="card card-about">
       <h3 class="card-title">Tentang</h3>
       <p class="text-sm">Diet Gemoy — companion program diet pribadi.</p>
-      <p class="text-sm">Versi 1.0.0 — Fase 1 (lokal).</p>
+      <p class="text-sm">Versi 1.0.1 — Fase 1 (lokal).</p>
     </section>
   </div>
 </template>

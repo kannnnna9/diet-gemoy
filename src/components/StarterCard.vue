@@ -18,12 +18,9 @@
       <span class="count-badge">{{ countdownLabel }}</span>
     </div>
 
-    <div v-for="(item, i) in items" :key="i" class="check-row">
-      <button class="check-btn" :class="{ done: dicentang[i] }" @click="toggle(i)">
-        <span v-if="dicentang[i]" class="check-icon">✓</span>
-      </button>
-      <span class="check-label" :class="{ done: dicentang[i] }">{{ item }}</span>
-    </div>
+    <ul class="starter-list">
+      <li v-for="(item, i) in items" :key="i">{{ item }}</li>
+    </ul>
   </div>
 </template>
 
@@ -38,20 +35,14 @@ const prog = getProgram()
 
 const items = computed(() => prog.starter14Hari[profile.profilAktif] || [])
 
-// State per profil (write-through, reaktif)
-const dicentang = ref(get(profile.profilAktif, 'starterCheck', {}))
+// State sembunyi per profil (write-through, reaktif)
 const tersembunyi = ref(get(profile.profilAktif, 'starterHidden', false))
 
 // Ganti profil → muat ulang state profil itu
 watch(() => profile.profilAktif, (pid) => {
-  dicentang.value = get(pid, 'starterCheck', {})
   tersembunyi.value = get(pid, 'starterHidden', false)
 })
 
-function toggle(i) {
-  dicentang.value = { ...dicentang.value, [i]: !dicentang.value[i] }
-  set(profile.profilAktif, 'starterCheck', dicentang.value)
-}
 function setSembunyi(val) {
   tersembunyi.value = val
   set(profile.profilAktif, 'starterHidden', val)
@@ -94,29 +85,29 @@ const countdownLabel = computed(() => {
   padding: 3px 10px;
   border-radius: 99px;
 }
-.check-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 0;
+.starter-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.starter-list li {
+  position: relative;
+  padding: 8px 0 8px 18px;
+  font-size: .875rem;
+  color: var(--text);
   border-bottom: 1px solid var(--line);
 }
-.check-row:last-child { border-bottom: none; }
-.check-btn {
-  width: 22px;
-  height: 22px;
+.starter-list li:last-child { border-bottom: none; }
+.starter-list li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 15px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  border: 2px solid var(--line);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  background: transparent;
+  background: var(--primary);
 }
-.check-btn.done { background: var(--primary); border-color: var(--primary); }
-.check-icon { color: var(--on-primary); font-size: .75rem; font-weight: 700; }
-.check-label { font-size: .875rem; color: var(--text); }
-.check-label.done { color: var(--text-muted); text-decoration: line-through; }
 .peek {
   width: 100%;
   text-align: left;
