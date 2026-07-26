@@ -9,6 +9,7 @@ const routes = [
   { path: '/catat', name: 'catat', component: () => import('../views/Catat.vue') },
   { path: '/progres', name: 'progres', component: () => import('../views/Progres.vue') },
   { path: '/pengaturan', name: 'pengaturan', component: () => import('../views/Pengaturan.vue') },
+  { path: '/pasangan', name: 'pasangan', component: () => import('../views/Pasangan.vue') },
   { path: '/login', name: 'login', component: () => import('../views/Login.vue') },
 ]
 

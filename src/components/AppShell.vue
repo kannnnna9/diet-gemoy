@@ -23,21 +23,30 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { Home, BookOpen, PencilLine, TrendingUp, Settings } from 'lucide-vue-next'
+import { Home, BookOpen, PencilLine, TrendingUp, HeartHandshake, Settings } from 'lucide-vue-next'
 import ProfileSwitch from './ProfileSwitch.vue'
 import { isSupabaseReady } from '../lib/supabase'
+import { useAuthStore } from '../stores/auth'
 
 const route = useRoute()
 const router = useRouter()
+const auth = useAuthStore()
 
-const navItems = [
-  { to: '/', icon: Home, label: 'Hari Ini' },
-  { to: '/program', icon: BookOpen, label: 'Program' },
-  { to: '/catat', icon: PencilLine, label: 'Catat' },
-  { to: '/progres', icon: TrendingUp, label: 'Progres' },
-  { to: '/pengaturan', icon: Settings, label: 'Atur' },
-]
+// "Pasangan" tampil hanya saat mode Supabase + sudah login.
+const navItems = computed(() =>
+  [
+    { to: '/', icon: Home, label: 'Hari Ini' },
+    { to: '/program', icon: BookOpen, label: 'Program' },
+    { to: '/catat', icon: PencilLine, label: 'Catat' },
+    { to: '/progres', icon: TrendingUp, label: 'Progres' },
+    isSupabaseReady && auth.profilId
+      ? { to: '/pasangan', icon: HeartHandshake, label: 'Pasangan' }
+      : null,
+    { to: '/pengaturan', icon: Settings, label: 'Atur' },
+  ].filter(Boolean)
+)
 
 function navigate(to) {
   if (route.path !== to) router.push(to)
