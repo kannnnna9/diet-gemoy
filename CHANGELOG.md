@@ -2,6 +2,12 @@
 
 Format mengikuti [Keep a Changelog](https://keepachangelog.com/) & [SemVer](https://semver.org/).
 
+## [1.1.1] — 2026-07-26
+
+### Diubah
+- Layar login jadi portal full-screen berdiri sendiri (tanpa header & bottom-nav).
+- Desain login "Hero Organik" dengan palet warna acak tiap dibuka: Matcha (suami) atau Cranberry (istri).
+
 ## [1.1.0] — 2026-07-26
 
 ### Ditambahkan
