@@ -22,15 +22,27 @@
       </div>
     </div>
     <p v-else class="text-sm text-muted">Belum ada catatan BB.</p>
+
+    <DialogKonfirmasi
+      v-if="showDialog"
+      judul="Konfirmasi Berat Badan"
+      @konfirmasi="konfirmasiSimpan"
+      @batal="showDialog = false"
+    >
+      Simpan BB <strong>{{ pending }} kg</strong>? Data tidak bisa dihapus — pastikan sudah benar.
+    </DialogKonfirmasi>
   </div>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
 import { useTrackingStore } from '../stores/tracking'
+import DialogKonfirmasi from './DialogKonfirmasi.vue'
 
 const tracking = useTrackingStore()
 const inputKg = ref('')
+const pending = ref(null)
+const showDialog = ref(false)
 
 const riwayat = computed(() => tracking.getRiwayatBB())
 const delta = computed(() => {
@@ -41,8 +53,15 @@ const delta = computed(() => {
 function simpan() {
   const kg = parseFloat(inputKg.value)
   if (isNaN(kg) || kg <= 0) return
-  tracking.tambahBB(kg)
+  pending.value = kg
+  showDialog.value = true
+}
+
+function konfirmasiSimpan() {
+  tracking.tambahBB(pending.value)
   inputKg.value = ''
+  showDialog.value = false
+  pending.value = null
 }
 </script>
 

@@ -24,12 +24,25 @@
       </div>
     </div>
     <p v-else class="text-sm text-muted">Belum ada catatan ukuran.</p>
+
+    <DialogKonfirmasi
+      v-if="showDialog"
+      judul="Konfirmasi Ukuran"
+      @konfirmasi="konfirmasiSimpan"
+      @batal="showDialog = false"
+    >
+      <span v-for="(v, k, i) in pending" :key="k">
+        {{ fields.find(f => f.key === k)?.label || k }} {{ v }}<span v-if="i < Object.keys(pending).length - 1"> · </span>
+      </span>
+      <strong> — sudah benar?</strong>
+    </DialogKonfirmasi>
   </div>
 </template>
 
 <script setup>
 import { ref, reactive, computed } from 'vue'
 import { useTrackingStore } from '../stores/tracking'
+import DialogKonfirmasi from './DialogKonfirmasi.vue'
 
 const tracking = useTrackingStore()
 
@@ -45,6 +58,8 @@ const form = reactive({})
 fields.forEach(f => form[f.key] = '')
 
 const riwayat = computed(() => tracking.getRiwayatUkuran())
+const pending = ref(null)
+const showDialog = ref(false)
 
 function simpan() {
   const entry = {}
@@ -57,8 +72,15 @@ function simpan() {
     }
   })
   if (!ada) return
-  tracking.tambahUkuran(entry)
+  pending.value = entry
+  showDialog.value = true
+}
+
+function konfirmasiSimpan() {
+  tracking.tambahUkuran(pending.value)
   fields.forEach(f => form[f.key] = '')
+  showDialog.value = false
+  pending.value = null
 }
 </script>
 

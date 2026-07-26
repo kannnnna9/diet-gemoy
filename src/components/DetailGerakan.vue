@@ -14,10 +14,21 @@
       rel="noopener"
       class="btn-video"
     >Lihat video</a>
+    <a
+      v-else
+      :href="youtubeSearchUrl(gerakan.nama)"
+      target="_blank"
+      rel="noopener"
+      class="btn-video btn-video-cari"
+    >
+      Cari di YouTube
+    </a>
   </div>
 </template>
 
 <script setup>
+import { youtubeSearchUrl } from '../lib/videoLink'
+
 defineProps({
   gerakan: { type: Object, required: true },
 })
@@ -63,5 +74,9 @@ defineProps({
   border-radius: var(--r-sm);
   font-size: .75rem;
   font-weight: 600;
+}
+.btn-video-cari {
+  border-color: var(--text-muted);
+  color: var(--text-muted);
 }
 </style>

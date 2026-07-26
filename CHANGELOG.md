@@ -2,6 +2,17 @@
 
 Format mengikuti [Keep a Changelog](https://keepachangelog.com/) & [SemVer](https://semver.org/).
 
+## [1.2.0] — 2026-07-26
+
+### Ditambahkan
+- **Redirect balik ke halaman asal** saat refresh: guard login kini menyertakan query `redirect` dengan path semula; setelah sesi OAuth pulih, navigasi mengembalikan ke halaman itu (bukan selalu beranda). Login beneran tetap mendarat di beranda.
+- **Riwayat BB & Ukuran reaktif**: simpan BB/ukuran kini langsung tampil di daftar riwayat & grafik Progres tanpa perlu refresh. Ganti profil tetap benar.
+- **Konfirmasi sebelum simpan BB & Ukuran**: dialog in-app (bertema) menampilkan ringkasan nilai; "Periksa lagi" membatalkan tanpa menyimpan, "Ya, simpan" menyimpan & langsung tampil.
+- **Tombol "Cari di YouTube" fallback** untuk gerakan tanpa `media.video`: membuka hasil pencarian YouTube dengan nama gerakan langsung dari browser. Slot `media.video` khusus tetap menampilkan "Lihat video" bila terisi di masa depan.
+
+### Diubah
+- Reaktivitas store tracking mengikuti pola `checklists` (ref maps key per profil).
+
 ## [1.1.3] — 2026-07-26
 
 ### Diperbaiki

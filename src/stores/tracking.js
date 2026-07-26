@@ -10,8 +10,11 @@ export const useTrackingStore = defineStore('tracking', () => {
   const pid = () => profile.profilAktif
 
   // Cadangan reaktif checklist: key `${pid}:${tanggal}` -> { itemId: bool }.
-  // Tampilan baca dari sini (bukan localStorage langsung) supaya klik langsung terlihat.
   const checklists = ref({})
+
+  // Cadangan reaktif riwayat BB & Ukuran per profil: key = pid()
+  const riwayatBBMap = ref({})
+  const riwayatUkuranMap = ref({})
 
   const keyFor = (tanggal) => `${pid()}:${tanggal}`
 
@@ -36,87 +39,112 @@ export const useTrackingStore = defineStore('tracking', () => {
     push('checklist', tanggal, checklists.value[k])
   }
 
+  function ensureRiwayatBB() {
+    const p = pid()
+    if (!(p in riwayatBBMap.value)) {
+      riwayatBBMap.value[p] = get(p, 'riwayatBB', [])
+    }
+  }
+
+  function ensureRiwayatUkuran() {
+    const p = pid()
+    if (!(p in riwayatUkuranMap.value)) {
+      riwayatUkuranMap.value[p] = get(p, 'riwayatUkuran', [])
+    }
+  }
+
   function getRiwayatBB() {
-    return get(pid(), 'riwayatBB', [])
+    ensureRiwayatBB()
+    return riwayatBBMap.value[pid()]
   }
 
   function tambahBB(kg) {
-    const r = getRiwayatBB()
+    ensureRiwayatBB()
+    const p = pid()
+    const r = [...riwayatBBMap.value[p]]
     const tgl = new Date().toISOString().slice(0, 10)
     const idx = r.findIndex(e => e.tanggal === tgl)
     if (idx >= 0) {
-      r[idx].kg = kg
+      r[idx] = { ...r[idx], kg }
     } else {
       r.push({ tanggal: tgl, kg })
     }
     r.sort((a, b) => a.tanggal.localeCompare(b.tanggal))
-    set(pid(), 'riwayatBB', r)
-    set(pid(), `bb:${tgl}:ts`, new Date().toISOString())
+    riwayatBBMap.value = { ...riwayatBBMap.value, [p]: r }
+    set(p, 'riwayatBB', r)
+    set(p, `bb:${tgl}:ts`, new Date().toISOString())
     push('bb', tgl, { kg })
     return r
   }
 
   function getRiwayatUkuran() {
-    return get(pid(), 'riwayatUkuran', [])
+    ensureRiwayatUkuran()
+    return riwayatUkuranMap.value[pid()]
   }
 
   function tambahUkuran(entry) {
-    const r = getRiwayatUkuran()
+    ensureRiwayatUkuran()
+    const p = pid()
     const tgl = new Date().toISOString().slice(0, 10)
-    entry.tanggal = tgl
+    const r = [...riwayatUkuranMap.value[p]]
     const idx = r.findIndex(e => e.tanggal === tgl)
     if (idx >= 0) {
-      r[idx] = { ...r[idx], ...entry }
+      r[idx] = { ...r[idx], ...entry, tanggal: tgl }
     } else {
-      r.push(entry)
+      r.push({ ...entry, tanggal: tgl })
     }
     r.sort((a, b) => a.tanggal.localeCompare(b.tanggal))
-    set(pid(), 'riwayatUkuran', r)
-    set(pid(), `ukuran:${tgl}:ts`, new Date().toISOString())
+    riwayatUkuranMap.value = { ...riwayatUkuranMap.value, [p]: r }
+    set(p, 'riwayatUkuran', r)
+    set(p, `ukuran:${tgl}:ts`, new Date().toISOString())
     push('ukuran', tgl, entry)
     return r
   }
 
   // Terima hasil pull dari cloud, rekonsiliasi LWW vs timestamp lokal, tulis balik ke ref & localStorage.
   function terimaDariCloud(jenis, tanggal, payload, updated_at) {
+    const p = pid()
     const cloud = { payload, updated_at: updated_at || new Date().toISOString() }
 
     if (jenis === 'checklist') {
       const kunci = `checklist:${tanggal}`
       const kunciTs = `${kunci}:ts`
-      const lokalRaw = get(pid(), kunci, null)
+      const lokalRaw = get(p, kunci, null)
       const lokal = lokalRaw
-        ? { payload: lokalRaw, updated_at: get(pid(), kunciTs, '1970-01-01T00:00:00Z') }
+        ? { payload: lokalRaw, updated_at: get(p, kunciTs, '1970-01-01T00:00:00Z') }
         : null
       const menang = pilihLww(lokal, cloud)
       checklists.value[keyFor(tanggal)] = menang.payload
-      set(pid(), kunci, menang.payload)
-      set(pid(), kunciTs, menang.updated_at)
+      set(p, kunci, menang.payload)
+      set(p, kunciTs, menang.updated_at)
       return
     }
     if (jenis === 'bb') {
       const kunciTs = `bb:${tanggal}:ts`
-      const r = getRiwayatBB()
+      ensureRiwayatBB()
+      const r = [...riwayatBBMap.value[p]]
       const lokalEntry = r.find(e => e.tanggal === tanggal)
       const lokal = lokalEntry
-        ? { payload: { kg: lokalEntry.kg }, updated_at: get(pid(), kunciTs, '1970-01-01T00:00:00Z') }
+        ? { payload: { kg: lokalEntry.kg }, updated_at: get(p, kunciTs, '1970-01-01T00:00:00Z') }
         : null
       const menang = pilihLww(lokal, cloud)
       const idx = r.findIndex(e => e.tanggal === tanggal)
-      if (idx >= 0) r[idx].kg = menang.payload.kg
+      if (idx >= 0) r[idx] = { ...r[idx], kg: menang.payload.kg }
       else r.push({ tanggal, kg: menang.payload.kg })
       r.sort((a, b) => a.tanggal.localeCompare(b.tanggal))
-      set(pid(), 'riwayatBB', r)
-      set(pid(), kunciTs, menang.updated_at)
+      riwayatBBMap.value = { ...riwayatBBMap.value, [p]: r }
+      set(p, 'riwayatBB', r)
+      set(p, kunciTs, menang.updated_at)
       return
     }
     if (jenis === 'ukuran') {
       const tgl = payload.tanggal || tanggal
       const kunciTs = `ukuran:${tgl}:ts`
-      const r = getRiwayatUkuran()
+      ensureRiwayatUkuran()
+      const r = [...riwayatUkuranMap.value[p]]
       const lokalEntry = r.find(e => e.tanggal === tgl)
       const lokal = lokalEntry
-        ? { payload: lokalEntry, updated_at: get(pid(), kunciTs, '1970-01-01T00:00:00Z') }
+        ? { payload: lokalEntry, updated_at: get(p, kunciTs, '1970-01-01T00:00:00Z') }
         : null
       const menang = pilihLww(lokal, cloud)
       const menangEntry = { ...menang.payload, tanggal: tgl }
@@ -124,8 +152,9 @@ export const useTrackingStore = defineStore('tracking', () => {
       if (idx >= 0) r[idx] = { ...r[idx], ...menangEntry }
       else r.push(menangEntry)
       r.sort((a, b) => a.tanggal.localeCompare(b.tanggal))
-      set(pid(), 'riwayatUkuran', r)
-      set(pid(), kunciTs, menang.updated_at)
+      riwayatUkuranMap.value = { ...riwayatUkuranMap.value, [p]: r }
+      set(p, 'riwayatUkuran', r)
+      set(p, kunciTs, menang.updated_at)
     }
   }
 
@@ -133,6 +162,8 @@ export const useTrackingStore = defineStore('tracking', () => {
     ensureChecklist,
     getChecklist,
     setChecklistItem,
+    ensureRiwayatBB,
+    ensureRiwayatUkuran,
     getRiwayatBB,
     tambahBB,
     getRiwayatUkuran,

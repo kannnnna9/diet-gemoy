@@ -22,7 +22,7 @@ router.beforeEach(async (to) => {
   if (!isSupabaseReady) return true
   const auth = useAuthStore()
   if (!auth.siap) await auth.init()
-  if (to.name !== 'login' && !auth.profilId) return { name: 'login' }
+  if (to.name !== 'login' && !auth.profilId) return { name: 'login', query: { redirect: to.fullPath } }
   if (to.name === 'login' && auth.profilId) return { name: 'beranda' }
   return true
 })
