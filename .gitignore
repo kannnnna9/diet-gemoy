@@ -2,7 +2,9 @@ node_modules
 dist
 
 # Privat — jangan ikut repo publik (sumber kebenaran: repo proyek-docs)
-docs/
+# docs/* ignore semua isi docs/, kecuali runbook setup yang aman dipublik.
+docs/*
+!docs/setup-fase2-supabase.md
 kerangka/
 .superpowers/
 AGENTS.md
@@ -10,3 +12,4 @@ OPEN-QUESTIONS.md
 
 # Artefak eksekutor lokal
 .opencode-exec.log
+.env
