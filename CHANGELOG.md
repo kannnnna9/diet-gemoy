@@ -2,6 +2,18 @@
 
 Format mengikuti [Keep a Changelog](https://keepachangelog.com/) & [SemVer](https://semver.org/).
 
+## [1.1.0] — 2026-07-26
+
+### Ditambahkan
+- Login Google wajib (whitelist 2 akun via tabel `profiles`; email tak terdaftar ditolak).
+- Sinkron data antar-HP: BB, ukuran, checklist (last-write-wins). Foto badan tetap lokal (tidak ikut sync, demi privasi).
+- Panel "Pasangan" read-only: lihat BB terkini & ringkasan checklist pasangan.
+- Antrean sync offline: perubahan saat offline dikirim otomatis saat online lagi.
+
+### Catatan
+- App tetap jalan tanpa kredensial Supabase (mode lokal Fase 1) untuk fork/dev.
+- Arsitektur sync via satu pintu (`lib/sync.js`) agar mudah dimigrasikan ke Supabase-primary nanti.
+
 ## [1.0.2] — 2026-07-25
 
 ### Ditambahkan
