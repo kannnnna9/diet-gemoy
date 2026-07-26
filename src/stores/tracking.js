@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { get, set } from '../lib/storage'
 import { useProfileStore } from './profile'
+import { pilihLww, push } from '../lib/sync'
 
 export const useTrackingStore = defineStore('tracking', () => {
   const profile = useProfileStore()
@@ -30,6 +31,9 @@ export const useTrackingStore = defineStore('tracking', () => {
     const k = keyFor(tanggal)
     checklists.value[k] = { ...checklists.value[k], [key]: val }
     set(pid(), `checklist:${tanggal}`, checklists.value[k])
+    const ts = new Date().toISOString()
+    set(pid(), `checklist:${tanggal}:ts`, ts)
+    push('checklist', tanggal, checklists.value[k])
   }
 
   function getRiwayatBB() {
@@ -47,6 +51,8 @@ export const useTrackingStore = defineStore('tracking', () => {
     }
     r.sort((a, b) => a.tanggal.localeCompare(b.tanggal))
     set(pid(), 'riwayatBB', r)
+    set(pid(), `bb:${tgl}:ts`, new Date().toISOString())
+    push('bb', tgl, { kg })
     return r
   }
 
@@ -66,7 +72,61 @@ export const useTrackingStore = defineStore('tracking', () => {
     }
     r.sort((a, b) => a.tanggal.localeCompare(b.tanggal))
     set(pid(), 'riwayatUkuran', r)
+    set(pid(), `ukuran:${tgl}:ts`, new Date().toISOString())
+    push('ukuran', tgl, entry)
     return r
+  }
+
+  // Terima hasil pull dari cloud, rekonsiliasi LWW vs timestamp lokal, tulis balik ke ref & localStorage.
+  function terimaDariCloud(jenis, tanggal, payload, updated_at) {
+    const cloud = { payload, updated_at: updated_at || new Date().toISOString() }
+
+    if (jenis === 'checklist') {
+      const kunci = `checklist:${tanggal}`
+      const kunciTs = `${kunci}:ts`
+      const lokalRaw = get(pid(), kunci, null)
+      const lokal = lokalRaw
+        ? { payload: lokalRaw, updated_at: get(pid(), kunciTs, '1970-01-01T00:00:00Z') }
+        : null
+      const menang = pilihLww(lokal, cloud)
+      checklists.value[keyFor(tanggal)] = menang.payload
+      set(pid(), kunci, menang.payload)
+      set(pid(), kunciTs, menang.updated_at)
+      return
+    }
+    if (jenis === 'bb') {
+      const kunciTs = `bb:${tanggal}:ts`
+      const r = getRiwayatBB()
+      const lokalEntry = r.find(e => e.tanggal === tanggal)
+      const lokal = lokalEntry
+        ? { payload: { kg: lokalEntry.kg }, updated_at: get(pid(), kunciTs, '1970-01-01T00:00:00Z') }
+        : null
+      const menang = pilihLww(lokal, cloud)
+      const idx = r.findIndex(e => e.tanggal === tanggal)
+      if (idx >= 0) r[idx].kg = menang.payload.kg
+      else r.push({ tanggal, kg: menang.payload.kg })
+      r.sort((a, b) => a.tanggal.localeCompare(b.tanggal))
+      set(pid(), 'riwayatBB', r)
+      set(pid(), kunciTs, menang.updated_at)
+      return
+    }
+    if (jenis === 'ukuran') {
+      const tgl = payload.tanggal || tanggal
+      const kunciTs = `ukuran:${tgl}:ts`
+      const r = getRiwayatUkuran()
+      const lokalEntry = r.find(e => e.tanggal === tgl)
+      const lokal = lokalEntry
+        ? { payload: lokalEntry, updated_at: get(pid(), kunciTs, '1970-01-01T00:00:00Z') }
+        : null
+      const menang = pilihLww(lokal, cloud)
+      const menangEntry = { ...menang.payload, tanggal: tgl }
+      const idx = r.findIndex(e => e.tanggal === tgl)
+      if (idx >= 0) r[idx] = { ...r[idx], ...menangEntry }
+      else r.push(menangEntry)
+      r.sort((a, b) => a.tanggal.localeCompare(b.tanggal))
+      set(pid(), 'riwayatUkuran', r)
+      set(pid(), kunciTs, menang.updated_at)
+    }
   }
 
   return {
@@ -77,5 +137,6 @@ export const useTrackingStore = defineStore('tracking', () => {
     tambahBB,
     getRiwayatUkuran,
     tambahUkuran,
+    terimaDariCloud,
   }
 })

@@ -12,11 +12,14 @@ export function pilihLww(lokal, cloud) {
 
 let _userId = null
 let _profilId = null
+let _syncListenerPasang = false
 const antrean = []
 
 export function initSync(userId, profilId) {
   _userId = userId
   _profilId = profilId
+  if (_syncListenerPasang) return
+  _syncListenerPasang = true
   window.addEventListener('online', flush)
 }
 

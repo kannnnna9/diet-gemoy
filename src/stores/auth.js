@@ -44,6 +44,14 @@ export const useAuthStore = defineStore('auth', () => {
     profilId.value = prof.profil_id
     pasanganUserId.value = prof.pasangan_user_id
     useProfileStore().terapkanDariAuth(prof.profil_id)
+
+    // Sync: init sekali + tarik data sendiri & pasangan. Idempoten via flag di sync.initSync.
+    const { initSync, pullMine, pullPartner } = await import('../lib/sync')
+    initSync(session.user.id, prof.profil_id)
+    const { useTrackingStore } = await import('./tracking')
+    const t = useTrackingStore()
+    await pullMine((cloud) => t.terimaDariCloud(cloud.jenis, cloud.tanggal, cloud.payload, cloud.updated_at))
+    await pullPartner(prof.pasangan_user_id)
   }
 
   async function loginGoogle() {
