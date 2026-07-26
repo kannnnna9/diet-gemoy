@@ -11,7 +11,7 @@ import { useRoute, useRouter } from 'vue-router'
 import AppShell from './components/AppShell.vue'
 import { useProfileStore } from './stores/profile'
 import { useAuthStore } from './stores/auth'
-import { perluKeBeranda } from './lib/authNav'
+import { perluKeBeranda, perluKeLogin } from './lib/authNav'
 
 const route = useRoute()
 const router = useRouter()
@@ -27,6 +27,7 @@ onMounted(() => auth.init())
 // perubahan auth yang datang setelah ia memutuskan.
 watch(() => auth.profilId, (id) => {
   if (perluKeBeranda(id, route.name)) router.replace({ name: 'beranda' })
+  else if (perluKeLogin(id, route.name)) router.replace({ name: 'login' })
 })
 
 // Tema html ikut profil aktif untuk mode app. Layar login pakai tema sendiri (scoped).

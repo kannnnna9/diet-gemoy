@@ -5,3 +5,9 @@
 export function perluKeBeranda(profilId, routeName) {
   return Boolean(profilId) && routeName === 'login'
 }
+
+// Kebalikannya: setelah logout, profil kosong sementara masih di halaman dalam app →
+// tendang ke login. Guard hanya jalan saat navigasi, jadi logout in-place tak tertangkap.
+export function perluKeLogin(profilId, routeName) {
+  return !profilId && routeName !== 'login'
+}

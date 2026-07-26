@@ -2,6 +2,11 @@
 
 Format mengikuti [Keep a Changelog](https://keepachangelog.com/) & [SemVer](https://semver.org/).
 
+## [1.1.3] — 2026-07-26
+
+### Diperbaiki
+- Logout kini langsung mental ke portal login (sebelumnya masih tertahan di menu Pengaturan sampai refresh/pindah menu). Navigasi bereaksi saat profil kosong secara in-place — cermin dari perbaikan login v1.1.2.
+
 ## [1.1.2] — 2026-07-26
 
 ### Diperbaiki
