@@ -60,7 +60,7 @@
     <section class="card card-about">
       <h3 class="card-title">Tentang</h3>
       <p class="text-sm">Diet Gemoy — companion program diet pribadi.</p>
-      <p class="text-sm">Versi 1.1.1 — Fase 2 (login Google + sync + pasangan).</p>
+      <p class="text-sm">Versi 1.1.2 — Fase 2 (login Google + sync + pasangan).</p>
     </section>
   </div>
 </template>

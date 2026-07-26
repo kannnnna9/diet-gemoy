@@ -2,6 +2,11 @@
 
 Format mengikuti [Keep a Changelog](https://keepachangelog.com/) & [SemVer](https://semver.org/).
 
+## [1.1.2] — 2026-07-26
+
+### Diperbaiki
+- Login tersangkut di portal setelah pilih akun Google (regresi v1.1.1): navigasi kini bereaksi saat sesi OAuth selesai secara async — begitu login sukses, langsung pindah ke beranda. Sebelumnya bergantung pada bottom-nav yang hilang di layar login full-screen.
+
 ## [1.1.1] — 2026-07-26
 
 ### Diubah
