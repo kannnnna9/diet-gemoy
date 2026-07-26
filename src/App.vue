@@ -5,11 +5,15 @@
 </template>
 
 <script setup>
-import { watchEffect } from 'vue'
+import { onMounted, watchEffect } from 'vue'
 import AppShell from './components/AppShell.vue'
 import { useProfileStore } from './stores/profile'
+import { useAuthStore } from './stores/auth'
 
 const profile = useProfileStore()
+const auth = useAuthStore()
+
+onMounted(() => auth.init())
 
 // Tema ikut profil aktif: ganti profil → seluruh app re-tema tanpa reload.
 watchEffect(() => {

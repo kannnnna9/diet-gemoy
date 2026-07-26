@@ -15,6 +15,14 @@ export const useProfileStore = defineStore('profile', () => {
     setRaw('_global', 'profilAktif', id)
   }
 
+  // Dipanggil auth store setelah login: kunci profilAktif dari hasil OAuth (mode Fase 2).
+  // Fallback localStorage untuk mode Track-A only tetap lewat `gantiProfil`.
+  function terapkanDariAuth(id) {
+    if (!id) return
+    profilAktif.value = id
+    setRaw('_global', 'profilAktif', id)
+  }
+
   function ubahNama(profilId, nama) {
     setRaw(profilId, 'nama', nama)
     namaOverride.value[profilId] = nama
@@ -37,6 +45,7 @@ export const useProfileStore = defineStore('profile', () => {
     profilAktif,
     namaOverride,
     gantiProfil,
+    terapkanDariAuth,
     ubahNama,
     getNama,
     modeHaid,

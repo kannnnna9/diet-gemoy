@@ -18,7 +18,7 @@
       </div>
     </section>
 
-    <section class="card">
+    <section v-if="!isSupabaseReady" class="card">
       <h3 class="card-title">Ganti Profil</h3>
       <p class="text-sm">Profil aktif saat ini: <strong>{{ namaTampil }}</strong></p>
       <div class="profil-list">
@@ -32,6 +32,12 @@
           {{ profile.getNama(p.id) || p.namaDefault }}
         </button>
       </div>
+    </section>
+
+    <section v-else-if="auth.profilId" class="card">
+      <h3 class="card-title">Akun</h3>
+      <p class="text-sm">Masuk sebagai <strong>{{ auth.user?.email || profile.profilAktif }}</strong></p>
+      <button class="btn logout-btn" @click="auth.logout()">Keluar</button>
     </section>
 
     <section v-if="profile.profilAktif === 'ffazeyall'" class="card">
@@ -62,10 +68,13 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useProfileStore } from '../stores/profile'
+import { useAuthStore } from '../stores/auth'
+import { isSupabaseReady } from '../lib/supabase'
 import { getSlotHarian } from '../data/program'
 import { downloadIcs } from '../lib/ics'
 
 const profile = useProfileStore()
+const auth = useAuthStore()
 const namaBaru = ref('')
 
 const profilList = [
@@ -189,6 +198,8 @@ function simpanNama() {
 }
 
 .export-btn { margin-top: 10px; font-weight: 600; }
+
+.logout-btn { margin-top: 8px; background: var(--danger); }
 
 .card-about {
   margin-top: 24px;

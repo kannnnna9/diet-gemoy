@@ -2,7 +2,7 @@
   <div class="shell">
     <header class="shell-header">
       <span class="shell-title">Diet Gemoy</span>
-      <ProfileSwitch />
+      <ProfileSwitch v-if="!isSupabaseReady" />
     </header>
     <main class="shell-main">
       <slot />
@@ -26,6 +26,7 @@
 import { useRoute, useRouter } from 'vue-router'
 import { Home, BookOpen, PencilLine, TrendingUp, Settings } from 'lucide-vue-next'
 import ProfileSwitch from './ProfileSwitch.vue'
+import { isSupabaseReady } from '../lib/supabase'
 
 const route = useRoute()
 const router = useRouter()
