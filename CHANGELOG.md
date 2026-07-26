@@ -2,6 +2,21 @@
 
 Format mengikuti [Keep a Changelog](https://keepachangelog.com/) & [SemVer](https://semver.org/).
 
+## [1.2.1] — 2026-07-26
+
+### Diperbaiki
+- Flash portal login saat refresh di halaman dalam app (catat/program/progres/dll) kini
+  digantikan splash "Diet Gemoy" sesaat sebelum halaman tujuan tampil.
+- Init auth tidak lagi early-return tanpa menunggu — cache promise memastikan
+  `await auth.init()` di guard router benar-benar menunggu sesi selesai dipulihkan.
+
+### Ditambahkan
+- Komponen SplashLoading: layar penuh bertema dengan logo teks "Diet Gemoy" + animasi
+  tiga dot, dirender selama auth belum siap.
+
+### Diubah
+- `auth.init()` pakai cache promise (ganti flag `_initStarted` boolean).
+
 ## [1.2.0] — 2026-07-26
 
 ### Ditambahkan

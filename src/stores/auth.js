@@ -10,16 +10,18 @@ export const useAuthStore = defineStore('auth', () => {
   const siap = ref(false)
   const ditolak = ref(false)
 
-  let _initStarted = false
+  let _initPromise = null
 
-  async function init() {
-    if (_initStarted) return
-    _initStarted = true
-    if (!isSupabaseReady) { siap.value = true; return }
-    const { data } = await supabase.auth.getSession()
-    await terapkanSesi(data.session)
-    supabase.auth.onAuthStateChange((_e, session) => terapkanSesi(session))
-    siap.value = true
+  function init() {
+    if (_initPromise) return _initPromise
+    _initPromise = (async () => {
+      if (!isSupabaseReady) { siap.value = true; return }
+      const { data } = await supabase.auth.getSession()
+      await terapkanSesi(data.session)
+      supabase.auth.onAuthStateChange((_e, session) => terapkanSesi(session))
+      siap.value = true
+    })()
+    return _initPromise
   }
 
   async function terapkanSesi(session) {

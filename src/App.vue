@@ -1,5 +1,6 @@
 <template>
-  <AppShell v-if="!isLoginRoute">
+  <SplashLoading v-if="!authSiap" />
+  <AppShell v-else-if="!isLoginRoute">
     <router-view />
   </AppShell>
   <router-view v-else />
@@ -9,6 +10,8 @@
 import { onMounted, watch, watchEffect, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import AppShell from './components/AppShell.vue'
+import SplashLoading from './components/SplashLoading.vue'
+import { isSupabaseReady } from './lib/supabase'
 import { useProfileStore } from './stores/profile'
 import { useAuthStore } from './stores/auth'
 import { perluKeLogin, tujuanSetelahLogin } from './lib/authNav'
@@ -19,6 +22,7 @@ const profile = useProfileStore()
 const auth = useAuthStore()
 
 const isLoginRoute = computed(() => route.name === 'login')
+const authSiap = computed(() => !isSupabaseReady || auth.siap)
 
 // Rute yang dikenal untuk validasi redirect (semua kecuali login).
 const ruteDikenal = router.getRoutes()
