@@ -11,6 +11,7 @@ const routes = [
   { path: '/pengaturan', name: 'pengaturan', component: () => import('../views/Pengaturan.vue') },
   { path: '/pasangan', name: 'pasangan', component: () => import('../views/Pasangan.vue') },
   { path: '/login', name: 'login', component: () => import('../views/Login.vue') },
+  { path: '/:pathMatch(.*)*', redirect: { name: 'beranda' } },
 ]
 
 const router = createRouter({

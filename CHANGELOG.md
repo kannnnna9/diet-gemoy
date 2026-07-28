@@ -2,6 +2,12 @@
 
 Format mengikuti [Keep a Changelog](https://keepachangelog.com/) & [SemVer](https://semver.org/).
 
+## [1.2.2] — 2026-07-28
+
+### Diperbaiki
+- Redirect OAuth Supabase kini tidak lagi membuat `router-view` blank saat login ulang setelah logout.
+- URL hash OAuth yang terbaca sebagai path tidak dikenal ditangkap dan diarahkan ke beranda.
+
 ## [1.2.1] — 2026-07-26
 
 ### Diperbaiki

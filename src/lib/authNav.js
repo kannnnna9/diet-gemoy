@@ -16,7 +16,7 @@ export function perluKeLogin(profilId, routeName) {
 // Jika ada redirect valid dari query string (hasil tendang guard di refresh), kembali ke situ.
 // Jika tidak, fallback ke beranda.
 export function tujuanSetelahLogin(routeName, redirectQuery, ruteDikenal) {
-  if (routeName !== 'login') return null
+  if (routeName && routeName !== 'login') return null
   if (
     redirectQuery &&
     redirectQuery.startsWith('/') &&
