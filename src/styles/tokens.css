@@ -17,6 +17,7 @@
   --shadow-soft: 0 2px 8px rgba(58, 52, 44, .08);
   --font-head: 'Fraunces', Georgia, serif;
   --font-body: 'Quicksand', system-ui, sans-serif;
+  --rig-stroke: 1;          /* penyetelan global ketebalan rig (bukan urusan tema) */
 
   /* ===== Default (mirror paypey) — dipakai sebelum data-theme diset ===== */
   --bg: #F4F2EA;

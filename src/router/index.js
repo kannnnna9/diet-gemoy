@@ -11,6 +11,10 @@ const routes = [
   { path: '/pengaturan', name: 'pengaturan', component: () => import('../views/Pengaturan.vue') },
   { path: '/pasangan', name: 'pasangan', component: () => import('../views/Pasangan.vue') },
   { path: '/login', name: 'login', component: () => import('../views/Login.vue') },
+  // Alat kerja dev — tidak pernah masuk nav. Harus TETAP sebelum catch-all.
+  ...(import.meta.env.DEV
+    ? [{ path: '/dev-rig', name: 'dev-rig', component: () => import('../views/DevRig.vue') }]
+    : []),
   { path: '/:pathMatch(.*)*', redirect: { name: 'beranda' } },
 ]
 
