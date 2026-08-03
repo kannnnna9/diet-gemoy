@@ -3,7 +3,7 @@
     <button class="back" @click="$router.push('/')">‹ Kembali</button>
     <h2 class="page-title">Uji Rig</h2>
 
-    <RigFigur :pose="pose" class="figur" />
+    <RigFigur :pose="posePreview || pose" class="figur" />
     <div class="info">
       yAkar <b>{{ pose.akar.y.toFixed(1) }}</b> · yAnkle
       <b>{{ pose.ankle.dekat.y.toFixed(1) }}</b> · yKepala
@@ -41,6 +41,7 @@
     <div class="aksi">
       <button class="btn" @click="salinKeyframe">Salin JSON keyframe</button>
       <button class="btn" @click="isiDariArea">Terapkan JSON</button>
+      <button class="btn" @click="putarAset">Putar preview</button>
     </div>
     <textarea v-model="area" class="area" rows="6" placeholder='Tempel JSON keyframe di sini…' />
 
@@ -49,8 +50,9 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, computed, onUnmounted } from 'vue'
 import { hitungPose } from '../lib/rig.js'
+import { poseSaat, durasiEfektif } from '../lib/rigAnim.js'
 import RigFigur from '../components/RigFigur.vue'
 
 const s = reactive({
@@ -90,6 +92,44 @@ const pose = computed(() => hitungPose(kf.value, { kontak: s.kontak }))
 
 const area = ref('')
 const pesan = ref('')
+
+// Mode putar: memutar aset lengkap yang ditempel (poseSaat + hitungPose, rAF).
+const posePreview = ref(null)
+let rafId = 0
+let asetPreview = null
+
+function hentiPreview() {
+  if (rafId) {
+    cancelAnimationFrame(rafId)
+    rafId = 0
+  }
+}
+
+onUnmounted(hentiPreview)
+
+function putarAset() {
+  try {
+    const data = JSON.parse(area.value)
+    if (!data.keyframes || !Array.isArray(data.keyframes) || data.keyframes.length < 2) {
+      pesan.value = 'Tempel aset LENGKAP (berisi keyframes) untuk preview.'
+      return
+    }
+    hentiPreview()
+    asetPreview = data
+    const t0 = performance.now()
+    const durasi = durasiEfektif(data)
+    const opts = { kontak: data.kontak, tambat: data.tambat }
+    const loop = (now) => {
+      const tNorm = ((now - t0) % durasi) / durasi
+      posePreview.value = hitungPose(poseSaat(data, tNorm), opts)
+      rafId = requestAnimationFrame(loop)
+    }
+    rafId = requestAnimationFrame(loop)
+    pesan.value = `Memutar "${data.id}" — ${durasi}ms per siklus.`
+  } catch {
+    pesan.value = 'JSON tidak valid.'
+  }
+}
 
 function keyframeJson() {
   return {
