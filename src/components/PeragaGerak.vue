@@ -5,7 +5,8 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'import { hitungPose } from '../lib/rig.js'
+import { ref, onMounted, onUnmounted } from 'vue'
+import { hitungPose } from '../lib/rig.js'
 import { poseSaat, durasiEfektif } from '../lib/rigAnim.js'
 import RigFigur from './RigFigur.vue'
 
@@ -48,9 +49,15 @@ let rafId = 0
 let t0 = 0
 let observer = null
 let dibongkar = false
+const diri = {} // identitas instance untuk penjaga satu-animasi-per-layar
 const optsAnimasi = () => ({ kontak: aset.kontak, tambat: aset.tambat })
 
+// Penjaga spec §7: maksimum SATU animasi berjalan per layar. Modul-level —
+// instance kedua yang terlihat menampilkan pose statis, tidak menambah loop rAF.
+let pemegangAnimasi = null
+
 function henti() {
+  if (pemegangAnimasi === diri) pemegangAnimasi = null
   if (rafId) {
     cancelAnimationFrame(rafId)
     rafId = 0
@@ -59,6 +66,11 @@ function henti() {
 
 function mulai() {
   if (rafId || !aset) return
+  if (pemegangAnimasi && pemegangAnimasi !== diri) {
+    pose.value = hitungPose(aset.keyframes[aset.keyframes.length - 1], optsAnimasi())
+    return
+  }
+  pemegangAnimasi = diri
   t0 = performance.now()
   const durasi = durasiEfektif(aset)
   const loop = (now) => {
@@ -113,6 +125,7 @@ onUnmounted(() => {
 <style scoped>
 .peraga {
   width: 100%;
+  height: 100%;
   background: var(--surface);
 }
 </style>

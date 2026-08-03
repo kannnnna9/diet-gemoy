@@ -18,8 +18,13 @@
     </div>
 
     <div class="kartu-media">
+      <PeragaGerak
+        v-if="animasiAktif"
+        :id="gerakan.id"
+        @tak-ada="animasiAktif = false"
+      />
       <img
-        v-if="fotoUrl"
+        v-else-if="fotoUrl"
         :src="fotoUrl"
         :alt="gerakan.nama"
         class="kartu-foto"
@@ -42,6 +47,7 @@ import { ref, computed, onMounted } from 'vue'
 import { useProfileStore } from '../stores/profile'
 import { getProgram, getGerakan } from '../data/program'
 import DetailGerakan from './DetailGerakan.vue'
+import PeragaGerak from './PeragaGerak.vue'
 
 const props = defineProps({
   gerakan: { type: Object, required: true },
@@ -53,6 +59,8 @@ const profile = useProfileStore()
 const prog = getProgram()
 
 const fotoUrl = ref(null)
+// Animasi jadi lapis TERATAS (spec §8); turun ke foto bila id tak ada di manifes.
+const animasiAktif = ref(true)
 const aturanLutut = computed(() => prog.aturanLutut || {})
 
 // Risiko lutut hanya untuk profil yang diatur di data (paypey), berbasis flag gerakan.
@@ -136,6 +144,8 @@ onMounted(async () => {
   margin: 8px 12px 0;
   border-radius: var(--r-sm);
   overflow: hidden;
+  height: 180px;
+  background: var(--surface);
 }
 .kartu-foto {
   width: 100%;
@@ -144,7 +154,7 @@ onMounted(async () => {
   background: var(--surface);
 }
 .kartu-placeholder {
-  height: 100px;
+  height: 180px;
   display: flex;
   flex-direction: column;
   align-items: center;

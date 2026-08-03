@@ -188,6 +188,7 @@ function isiDariArea() {
 .page-title { font-size: 1.5rem; }
 .figur {
   max-width: 280px;
+  aspect-ratio: 200 / 220;
   margin: 8px auto;
   border-radius: var(--r-md);
   overflow: hidden;
