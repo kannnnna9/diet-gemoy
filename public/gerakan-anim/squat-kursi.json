@@ -1,0 +1,16 @@
+{
+  "id": "squat-kursi",
+  "nama": "Squat ke kursi",
+  "tampilan": "samping",
+  "durasiMs": 4000,
+  "putar": "pingpong",
+  "kontak": "kaki",
+  "keyframes": [
+    { "t": 0, "akar": { "x": 0, "rotasi": 0 }, "torsoCondong": 0, "leher": 0, "bahuDekat": 0, "sikuDekat": 3, "bahuJauh": 0, "sikuJauh": 5, "pinggulDekat": 0, "lututDekat": 0, "pinggulJauh": 2, "lututJauh": 3 },
+    { "t": 0.22, "akar": { "x": -3, "rotasi": 0 }, "torsoCondong": 16, "leher": -6, "bahuDekat": 22, "sikuDekat": 8, "bahuJauh": 20, "sikuJauh": 11, "pinggulDekat": 20, "lututDekat": 10, "pinggulJauh": 23, "lututJauh": 13 },
+    { "t": 0.45, "akar": { "x": -8, "rotasi": 0 }, "torsoCondong": 30, "leher": -10, "bahuDekat": 48, "sikuDekat": 10, "bahuJauh": 45, "sikuJauh": 13, "pinggulDekat": 42, "lututDekat": 28, "pinggulJauh": 45, "lututJauh": 31 },
+    { "t": 0.7, "akar": { "x": -13, "rotasi": 0 }, "torsoCondong": 38, "leher": -14, "bahuDekat": 68, "sikuDekat": 9, "bahuJauh": 65, "sikuJauh": 12, "pinggulDekat": 66, "lututDekat": 52, "pinggulJauh": 69, "lututJauh": 55 },
+    { "t": 0.88, "akar": { "x": -16, "rotasi": 0 }, "torsoCondong": 41, "leher": -16, "bahuDekat": 80, "sikuDekat": 7, "bahuJauh": 77, "sikuJauh": 10, "pinggulDekat": 84, "lututDekat": 72, "pinggulJauh": 87, "lututJauh": 75 },
+    { "t": 1, "akar": { "x": -18, "rotasi": 0 }, "torsoCondong": 42, "leher": -16, "bahuDekat": 88, "sikuDekat": 6, "bahuJauh": 85, "sikuJauh": 9, "pinggulDekat": 93, "lututDekat": 88, "pinggulJauh": 95, "lututJauh": 91 }
+  ]
+}

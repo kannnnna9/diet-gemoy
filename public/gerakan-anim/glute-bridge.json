@@ -1,0 +1,14 @@
+{
+  "id": "glute-bridge",
+  "nama": "Glute bridge",
+  "tampilan": "samping",
+  "durasiMs": 4500,
+  "putar": "pingpong",
+  "kontak": "punggung",
+  "keyframes": [
+    { "t": 0, "akar": { "x": 0, "rotasi": -90 }, "torsoCondong": -2, "leher": 3, "bahuDekat": 5, "sikuDekat": 3, "bahuJauh": 8, "sikuJauh": 6, "pinggulDekat": 34, "lututDekat": 80, "pinggulJauh": 36, "lututJauh": 82 },
+    { "t": 0.4, "akar": { "x": 0, "rotasi": -90 }, "torsoCondong": -7, "leher": 3, "bahuDekat": 5, "sikuDekat": 3, "bahuJauh": 8, "sikuJauh": 6, "pinggulDekat": 32, "lututDekat": 82, "pinggulJauh": 34, "lututJauh": 84 },
+    { "t": 0.7, "akar": { "x": 0, "rotasi": -90 }, "torsoCondong": -10, "leher": 3, "bahuDekat": 5, "sikuDekat": 3, "bahuJauh": 8, "sikuJauh": 6, "pinggulDekat": 31, "lututDekat": 84, "pinggulJauh": 33, "lututJauh": 86 },
+    { "t": 1, "akar": { "x": 0, "rotasi": -90 }, "torsoCondong": -13, "leher": 3, "bahuDekat": 5, "sikuDekat": 3, "bahuJauh": 8, "sikuJauh": 6, "pinggulDekat": 30, "lututDekat": 85, "pinggulJauh": 32, "lututJauh": 87 }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "dead-bug",
+  "nama": "Dead bug",
+  "tampilan": "samping",
+  "durasiMs": 6000,
+  "putar": "loop",
+  "kontak": "punggung",
+  "keyframes": [
+    { "t": 0, "akar": { "x": 0, "rotasi": -90 }, "torsoCondong": 0, "leher": 2, "bahuDekat": 92, "sikuDekat": 5, "bahuJauh": 92, "sikuJauh": 5, "pinggulDekat": 92, "lututDekat": 92, "pinggulJauh": 92, "lututJauh": 92 },
+    { "t": 0.2, "akar": { "x": 0, "rotasi": -90 }, "torsoCondong": 0, "leher": 2, "bahuDekat": 165, "sikuDekat": 8, "bahuJauh": 92, "sikuJauh": 5, "pinggulDekat": 15, "lututDekat": 15, "pinggulJauh": 92, "lututJauh": 92 },
+    { "t": 0.4, "akar": { "x": 0, "rotasi": -90 }, "torsoCondong": 0, "leher": 2, "bahuDekat": 92, "sikuDekat": 5, "bahuJauh": 165, "sikuJauh": 8, "pinggulDekat": 92, "lututDekat": 92, "pinggulJauh": 15, "lututJauh": 15 },
+    { "t": 0.6, "akar": { "x": 0, "rotasi": -90 }, "torsoCondong": 0, "leher": 2, "bahuDekat": 165, "sikuDekat": 8, "bahuJauh": 92, "sikuJauh": 5, "pinggulDekat": 15, "lututDekat": 15, "pinggulJauh": 92, "lututJauh": 92 },
+    { "t": 0.8, "akar": { "x": 0, "rotasi": -90 }, "torsoCondong": 0, "leher": 2, "bahuDekat": 92, "sikuDekat": 5, "bahuJauh": 165, "sikuJauh": 8, "pinggulDekat": 92, "lututDekat": 92, "pinggulJauh": 15, "lututJauh": 15 },
+    { "t": 1, "akar": { "x": 0, "rotasi": -90 }, "torsoCondong": 0, "leher": 2, "bahuDekat": 92, "sikuDekat": 5, "bahuJauh": 92, "sikuJauh": 5, "pinggulDekat": 92, "lututDekat": 92, "pinggulJauh": 92, "lututJauh": 92 }
+  ]
+}
