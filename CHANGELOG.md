@@ -2,6 +2,25 @@
 
 Format mengikuti [Keep a Changelog](https://keepachangelog.com/) & [SemVer](https://semver.org/).
 
+## [1.3.0] — 2026-08-03
+
+### Ditambahkan
+- **Peraga Gerak — animasi tutorial 3 gerakan** (rig 2D SVG, nol dependency):
+  `squat-kursi`, `dead-bug`, `glute-bridge` kini dianimasikan di kartu gerakan.
+  Satu rig figur bersendi dibangun sekali (`lib/rig.js` + `RigFigur.vue`); tiap
+  gerakan hanyalah file JSON sudut sendi di `public/gerakan-anim/`.
+- Penambatan lantai otomatis: posisi panggul dihitung dari sudut tungkai +
+  bagian tubuh yang menyentuh lantai (kaki/punggung/sisi/tangan-kaki/bebas) —
+  figur tidak pernah melayang maupun menembus lantai.
+- Hemat baterai: animasi berhenti saat di luar layar (IntersectionObserver),
+  saat tab tak aktif, dan tidak beranimasi sama sekali pada
+  `prefers-reduced-motion: reduce` (pose statis). Maksimal satu animasi per layar.
+- Validator aset `npm run validasi:anim` (dan test sapuan otomatis di vitest):
+  menolak angka sendi di luar rentang, fisik yang mustahil, dan deep squat
+  (≤95°) — pantangan lutut pengguna dijadikan default terkunci.
+- Halaman uji `#/dev-rig` (dev-only): 10 slider sendi + rotasi + kontak +
+  tombol salin JSON keyframe — alat menyetel angka LLM tanpa GUI animasi.
+
 ## [1.2.2] — 2026-07-28
 
 ### Diperbaiki
