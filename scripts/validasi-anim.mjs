@@ -28,6 +28,20 @@ export const RENTANG_SENDI = {
 
 export const SENDI_NAMA = Object.keys(RENTANG_SENDI)
 
+// Pose berbaring (punggung/sisi/bahu-kaki): torsoCondong negatif besar sah
+// (panggul terangkat dari lantai), jadi rentang negatif diperdalam. Pose
+// berdiri (kaki) tetap ketat — badan menengadah ekstrem harus ditolak.
+const TORSO_MIN_BERBARING = -40
+const KONTAK_BERBARING = new Set(['punggung', 'sisi', 'bahu-kaki'])
+
+export function rentangSendi(kontak, sendi) {
+  const [min, max] = RENTANG_SENDI[sendi]
+  if (sendi === 'torsoCondong' && KONTAK_BERBARING.has(kontak)) {
+    return [TORSO_MIN_BERBARING, max]
+  }
+  return [min, max]
+}
+
 // Field usang yang TIDAK boleh ada di keyframe (spec §4) — peringatan, bukan tolak.
 export const SENDI_TERLARANG = ['akar.y', 'kakiDekat', 'kakiJauh']
 
@@ -40,9 +54,33 @@ function programId() {
   return new Set((data.gerakan || []).map((g) => g.id))
 }
 
-// Uji fisik spec §9.7 untuk kontak "kaki", per keyframe.
-function ujiFisik(kf, kesalahan) {
-  const { pinggulDekat = 0, lututDekat = 0, torsoCondong = 0 } = kf
+// Pagar pantangan: sudut "dalam" (deep squat dkk) memicu beban lutut ekstrem.
+// Ditolak KECUALI aset menulis `izinDalam: true` di level teratas.
+const MAKS_SENDI_DALAM = 95
+
+// Uji fisik spec §9.7 untuk kontak "kaki", per keyframe. Cek pantangan dalam
+// (semua sendi pinggul/lutut kedua sisi) berlaku untuk SEMUA kontak.
+function ujiFisik(kf, kesalahan, { kontak = null, izinDalam = false, index = 0 } = {}) {
+  const {
+    pinggulDekat = 0, lututDekat = 0,
+    pinggulJauh = 0, lututJauh = 0,
+    torsoCondong = 0,
+  } = kf
+  if (!izinDalam) {
+    for (const [nama, v] of [
+      ['pinggulDekat', pinggulDekat],
+      ['lututDekat', lututDekat],
+      ['pinggulJauh', pinggulJauh],
+      ['lututJauh', lututJauh],
+    ]) {
+      if (v > MAKS_SENDI_DALAM) {
+        kesalahan.push(
+          `keyframe[${index}]: ${nama} ${v} > ${MAKS_SENDI_DALAM} (butuh izinDalam: true)`,
+        )
+      }
+    }
+  }
+  if (kontak !== 'kaki') return
   if (lututDekat > pinggulDekat + 10) {
     kesalahan.push(`lutut melewati ujung jari (lututDekat ${lututDekat} > pinggulDekat ${pinggulDekat} + 10)`)
   }
@@ -100,7 +138,7 @@ export function validasiIsi(isi, ukuran) {
         kesalahan.push(`${s}: tidak memuat sendi ${sk}`)
         continue
       }
-      const [min, max] = RENTANG_SENDI[sk]
+      const [min, max] = rentangSendi(data.kontak, sk)
       if (kf[sk] < min || kf[sk] > max) {
         kesalahan.push(`${s}: ${sk} ${kf[sk]} di luar rentang ${min}..${max}`)
       }
@@ -109,7 +147,11 @@ export function validasiIsi(isi, ukuran) {
       const ada = l === 'akar.y' ? !!(kf.akar && kf.akar.y !== undefined) : kf[l] !== undefined
       if (ada) peringatan.push(`${s}: memuat field usang "${l}" (diabaikan renderer)`)
     }
-    if (data.kontak === 'kaki') ujiFisik(kf, kesalahan)
+    ujiFisik(kf, kesalahan, {
+      kontak: data.kontak,
+      izinDalam: data.izinDalam === true,
+      index: i,
+    })
   })
 
   if (ukuran > MAKS_UKURAN) {

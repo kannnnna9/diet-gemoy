@@ -58,7 +58,7 @@ function sudutTelapakUntuk(keringAbs, tambat) {
 }
 
 // Forward kinematics + penambatan lantai untuk satu keyframe.
-// `kf`: 10 sendi + `akar`. `opts.kontak`: kaki|punggung|sisi|tangan-kaki|bebas.
+// `kf`: 10 sendi + `akar`. `opts.kontak`: kaki|punggung|sisi|tangan-kaki|bahu-kaki|bebas.
 // `opts.tambat`: 'jari' opsional untuk jinjit.
 // `kf.akar.y`, `kf.kakiDekat`, `kf.kakiJauh` DIPAKSA DIABAIKAN (spec §4).
 export function hitungPose(kf, opts = {}) {
@@ -178,6 +178,13 @@ export function hitungPose(kf, opts = {}) {
       rantai['pergelanganTangan.dekat'], rantai['pergelanganTangan.jauh'],
       rantai['ankle.dekat'], rantai['ankle.jauh'],
     )
+    offsetKontak = STROKE.telapak / 2
+  } else if (kontak === 'bahu-kaki') {
+    // Glute bridge dkk: figur berbaring, bahu di satu ujung, tumit di ujung
+    // lain — BUKAN tengah torso. Titik tambat = titik terendah antara bahu
+    // dan ankle kaki dekat (koordinat relatif akar, jadi bahu.y − akar.y
+    // = rantai.bahu.y). `yAkar` dibuat agar titik terendah menyentuh lantai.
+    yTambat = Math.max(rantai.bahu.y, rantai['ankle.dekat'].y)
     offsetKontak = STROKE.telapak / 2
   }
 

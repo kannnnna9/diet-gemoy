@@ -58,6 +58,77 @@ describe('validator menolak file cacat', () => {
     rmSync(FILE_CACAT, { force: true })
   })
 
+  it('deep squat 130/125 tanpa izinDalam → DITOLAK dengan index+sendi+nilai', () => {
+    const aset = {
+      id: 'squat-kursi',
+      nama: 'Squat ke kursi',
+      tampilan: 'samping',
+      durasiMs: 4000,
+      putar: 'pingpong',
+      kontak: 'kaki',
+      keyframes: [
+        kfPenuh(0),
+        kfPenuh(0.33, { torsoCondong: 45, pinggulDekat: 60, lututDekat: 45 }),
+        kfPenuh(0.66, { torsoCondong: 45, pinggulDekat: 100, lututDekat: 85 }),
+        kfPenuh(1, { torsoCondong: 45, pinggulDekat: 130, lututDekat: 125, pinggulJauh: 130, lututJauh: 125 }),
+      ],
+    }
+    const hasil = validasiIsi(JSON.stringify(aset), 1000)
+    expect(hasil.ok).toBe(false)
+    expect(hasil.kesalahan.some((e) => e.includes('keyframe[3]') && e.includes('pinggulDekat 130'))).toBe(true)
+    expect(hasil.kesalahan.some((e) => e.includes('lututDekat 125'))).toBe(true)
+    expect(hasil.kesalahan.some((e) => e.includes('pinggulJauh 130'))).toBe(true)
+  })
+
+  it('deep squat 130/125 DENGAN izinDalam: true → LOLOS', () => {
+    const aset = {
+      id: 'squat-kursi',
+      nama: 'Squat ke kursi',
+      tampilan: 'samping',
+      durasiMs: 4000,
+      putar: 'pingpong',
+      kontak: 'kaki',
+      izinDalam: true,
+      keyframes: [
+        kfPenuh(0),
+        kfPenuh(0.33, { torsoCondong: 45, pinggulDekat: 60, lututDekat: 45 }),
+        kfPenuh(0.66, { torsoCondong: 45, pinggulDekat: 100, lututDekat: 85 }),
+        kfPenuh(1, { torsoCondong: 45, pinggulDekat: 130, lututDekat: 125, pinggulJauh: 130, lututJauh: 125 }),
+      ],
+    }
+    const hasil = validasiIsi(JSON.stringify(aset), 1000)
+    expect(hasil.ok, hasil.kesalahan.join('; ')).toBe(true)
+  })
+
+  it('torsoCondong bersyarat kontak: kaki tetap [-15], berbaring diperdalam [-40]', () => {
+    const asetKaki = {
+      id: 'squat-kursi',
+      kontak: 'kaki',
+      keyframes: [
+        kfPenuh(0),
+        kfPenuh(0.4, { torsoCondong: -16 }),
+        kfPenuh(0.7, { torsoCondong: -16 }),
+        kfPenuh(1, { torsoCondong: -16 }),
+      ],
+    }
+    const hasilKaki = validasiIsi(JSON.stringify(asetKaki), 500)
+    expect(hasilKaki.ok).toBe(false)
+    expect(hasilKaki.kesalahan.some((e) => e.includes('torsoCondong -16 di luar rentang -15'))).toBe(true)
+
+    const asetBerbaring = {
+      id: 'glute-bridge',
+      kontak: 'bahu-kaki',
+      keyframes: [
+        kfPenuh(0, { akar: { x: 0, rotasi: -90 } }),
+        kfPenuh(0.4, { akar: { x: 0, rotasi: -90 }, torsoCondong: -16, pinggulDekat: 28, lututDekat: 78 }),
+        kfPenuh(0.7, { akar: { x: 0, rotasi: -90 }, torsoCondong: -24, pinggulDekat: 24, lututDekat: 82 }),
+        kfPenuh(1, { akar: { x: 0, rotasi: -90 }, torsoCondong: -32, pinggulDekat: 20, lututDekat: 90 }),
+      ],
+    }
+    const hasilBerbaring = validasiIsi(JSON.stringify(asetBerbaring), 500)
+    expect(hasilBerbaring.ok, hasilBerbaring.kesalahan.join('; ')).toBe(true)
+  })
+
   it('id tak dikenal → ditolak; id dikenal tapi keyframe rusak → ditolak', () => {
     const hasil = validasiIsi(JSON.stringify({ id: 'tak-ada-id', keyframes: [] }), 100)
     expect(hasil.ok).toBe(false)

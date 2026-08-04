@@ -127,6 +127,40 @@ describe('kontak punggung / bebas', () => {
   })
 })
 
+describe('kontak bahu-kaki (glute bridge)', () => {
+  // Titik tambat = titik terendah antara bahu dan ankle kaki dekat; setelah
+  // penambatan titik itu menyentuh lantai: KANVAS.lantai - STROKE.telapak/2.
+  const LANTAI_KONTAK = KANVAS.lantai - 7 / 2
+
+  it('t0 berbaring penuh (semua 0): bahu == titik tambat, panggul di lantai', () => {
+    const p = hitungPose(kf({ akar: { x: 0, rotasi: -90 } }), { kontak: 'bahu-kaki' })
+    expect(p.bahu.y).toBeCloseTo(LANTAI_KONTAK, 1)
+    expect(p.ankle.dekat.y).toBeCloseTo(LANTAI_KONTAK, 1)
+    expect(p.akar.y).toBeCloseTo(LANTAI_KONTAK, 1)
+  })
+
+  it('puncak bridge: bahu tetap == titik tambat, panggul naik >= 20 satuan', () => {
+    const t0 = hitungPose(kf({ akar: { x: 0, rotasi: -90 } }), { kontak: 'bahu-kaki' })
+    const puncak = hitungPose(
+      kf({
+        akar: { x: 0, rotasi: -90 },
+        torsoCondong: -32, leher: 3,
+        pinggulDekat: 20, lututDekat: 90,
+        pinggulJauh: 22, lututJauh: 92,
+      }),
+      { kontak: 'bahu-kaki' },
+    )
+    expect(puncak.bahu.y).toBeCloseTo(LANTAI_KONTAK, 1)
+    expect(puncak.akar.y).toBeLessThanOrEqual(t0.akar.y - 20)
+  })
+
+  it('pose berdiri (kontak kaki) tidak terpengaruh mode bahu-kaki: rentangnya tetap', () => {
+    const p = hitungPose(kf({ pinggulDekat: 90, lututDekat: 90, pinggulJauh: 90, lututJauh: 90 }), { kontak: 'kaki' })
+    expect(p.akar.y).toBeCloseTo(166.5, 1)
+    expect(p.ankle.dekat.y).toBeCloseTo(204.5, 1)
+  })
+})
+
 describe('kepala & stabilitas', () => {
   it('netral: yKepalaPusat 56.5 dan di atas akar (tak jungkir balik)', () => {
     const p = hitungPose(netral, { kontak: 'kaki' })
