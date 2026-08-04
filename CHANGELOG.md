@@ -2,6 +2,31 @@
 
 Format mengikuti [Keep a Changelog](https://keepachangelog.com/) & [SemVer](https://semver.org/).
 
+## [1.3.1] — 2026-08-04
+
+### Diubah
+- **Koreksi instruksi gerakan hasil audit teknis 49 gerakan.** Perbaikan
+  konten (`content/program.json`), tanpa perubahan kode.
+  - Klaim "double chin" dihapus dari `wall-angel` & `chin-tuck` — spot reduction
+    tidak didukung bukti; postur memperjelas garis rahang, bukan membakar lemak.
+  - `heel-tap`: "tekuk pinggang ke samping" → "gerakkan rusuk turun ke panggul"
+    (arah gerak sudah benar, diksinya menyesatkan).
+  - `squat-kursi`: cue "lutut tidak melewati jari kaki" dibuang — membatasi lutut
+    justru memindahkan beban ke panggul & punggung bawah.
+  - `backpack-row`: varian Superman dipisah (beda bidang gerak & otot sasaran);
+    alternatif tanpa alat diarahkan ke band pull-apart / prone Y-T.
+  - `bicycle-lambat`, `single-arm-press`, `triceps-kickback`: cue diperbaiki agar
+    menangkap kesalahan yang sebenarnya (tarikan leher, hiperekstensi lumbal).
+  - `side-leg-raise`: pengganti "ganti aman" `dead-bug` → `clamshell` (sesama
+    abduktor panggul; dead-bug melatih core, sasaran otot tidak nyambung).
+
+### Ditambahkan
+- Cue keamanan yang sebelumnya hilang: `plank` (napas & leher netral),
+  `plank-shoulder-tap`, `rdl` (batas ROM), `floor-press` (set skapula),
+  `band-face-pull` (rotasi eksternal), `reverse-crunch`.
+- `vacuum`: kontraindikasi (hernia, hipertensi, gangguan jantung/paru, hamil)
+  + batas tahan 10–15 detik. Berlaku kedua profil.
+
 ## [1.3.0] — 2026-08-03
 
 ### Ditambahkan
