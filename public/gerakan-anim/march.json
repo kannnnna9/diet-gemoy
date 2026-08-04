@@ -1,0 +1,15 @@
+{
+  "id": "march",
+  "nama": "Marching di tempat",
+  "tampilan": "samping",
+  "durasiMs": 3000,
+  "putar": "loop",
+  "kontak": "kaki",
+  "keyframes": [
+    { "t": 0, "akar": { "x": 0, "rotasi": 0 }, "torsoCondong": 2, "leher": 0, "bahuDekat": -20, "sikuDekat": 25, "bahuJauh": 42, "sikuJauh": 28, "pinggulDekat": 92, "lututDekat": 90, "pinggulJauh": 3, "lututJauh": 2 },
+    { "t": 0.25, "akar": { "x": 0, "rotasi": 0 }, "torsoCondong": 0, "leher": 0, "bahuDekat": 10, "sikuDekat": 23, "bahuJauh": 8, "sikuJauh": 26, "pinggulDekat": 4, "lututDekat": 3, "pinggulJauh": 6, "lututJauh": 4 },
+    { "t": 0.5, "akar": { "x": 0, "rotasi": 0 }, "torsoCondong": 2, "leher": 0, "bahuDekat": 42, "sikuDekat": 28, "bahuJauh": -20, "sikuJauh": 25, "pinggulDekat": 3, "lututDekat": 2, "pinggulJauh": 92, "lututJauh": 90 },
+    { "t": 0.75, "akar": { "x": 0, "rotasi": 0 }, "torsoCondong": 0, "leher": 0, "bahuDekat": 8, "sikuDekat": 26, "bahuJauh": 10, "sikuJauh": 23, "pinggulDekat": 6, "lututDekat": 4, "pinggulJauh": 4, "lututJauh": 3 },
+    { "t": 1, "akar": { "x": 0, "rotasi": 0 }, "torsoCondong": 2, "leher": 0, "bahuDekat": -20, "sikuDekat": 25, "bahuJauh": 42, "sikuJauh": 28, "pinggulDekat": 92, "lututDekat": 90, "pinggulJauh": 3, "lututJauh": 2 }
+  ]
+}

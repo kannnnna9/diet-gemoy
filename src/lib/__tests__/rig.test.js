@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { hitungPose, rantaiTungkai, Y_AKAR_NETRAL, KANVAS } from '../rig.js'
+import { validasiIsi } from '../../../scripts/validasi-anim.mjs'
 
 // Keyframe netral: semua sendi 0, akar di tengah.
 // Bila tungkai ditekuk, KEDUA sisi ditekuk sama — titik tambat kaki = ankle
@@ -187,5 +188,72 @@ describe('kepala & stabilitas', () => {
     const p = hitungPose(kf({ torsoCondong: 40 }), { kontak: 'kaki' })
     expect(p.kepalaPusat.y).toBeLessThan(p.akar.y)
     expect(p.bahu.x).toBeGreaterThan(p.akar.x)
+  })
+})
+
+describe('kontak "merangkak" & aturan pusat massa', () => {
+  // Pose merangkak/plank telungkup (rotasi 90); pose berdiri tegak (rotasi 0).
+  const aset = (over = {}, kfOver = {}) => {
+    const kontak = over.kontak ?? 'merangkak'
+    const rotasi = kontak === 'merangkak' || kontak === 'tangan-kaki' ? 90 : 0
+    const akar = { x: 0, rotasi }
+    return JSON.stringify({
+      id: 'cat-cow', nama: 'Uji', tampilan: 'samping',
+      durasiMs: 4000, putar: 'pingpong', kontak: 'merangkak',
+      keyframes: [
+        { ...kf({}), akar, t: 0 },
+        { ...kf({}), akar, t: 0.4 },
+        { ...kf({}), akar, t: 0.7 },
+        { ...kf(kfOver), akar, t: 1 },
+      ],
+      ...over,
+    })
+  }
+
+  const jalankan = (isi) => validasiIsi(isi, isi.length)
+
+  it('T1 merangkak menambat identik dengan tangan-kaki', () => {
+    const pose = kf({ pinggulDekat: 90, lututDekat: 90, akar: { x: 0, rotasi: 90 } })
+    const a = hitungPose(pose, { kontak: 'merangkak' })
+    const b = hitungPose(pose, { kontak: 'tangan-kaki' })
+    expect(a.akar.y).toBeCloseTo(b.akar.y, 6)
+  })
+
+  it('T2 merangkak boleh torsoCondong -22', () => {
+    expect(jalankan(aset({}, { torsoCondong: -22 })).kesalahan).toEqual([])
+  })
+
+  it('T3 tangan-kaki (plank) TETAP menolak torsoCondong -22', () => {
+    const r = jalankan(aset({ kontak: 'tangan-kaki' }, { torsoCondong: -22 }))
+    expect(r.kesalahan.join(' ')).toMatch(/torsoCondong -22 di luar rentang/)
+  })
+
+  it('T4 pola march lolos: satu lutut naik, kaki lain menapak tegak', () => {
+    const isi = aset(
+      { kontak: 'kaki', id: 'march' },
+      { pinggulDekat: 92, lututDekat: 90, pinggulJauh: 3, lututJauh: 2, torsoCondong: 2 },
+    )
+    expect(jalankan(isi).kesalahan).toEqual([])
+  })
+
+  it('T5 pola squat ditolak: dua kaki menekuk tanpa torso condong', () => {
+    const isi = aset(
+      { kontak: 'kaki', id: 'goblet-squat' },
+      { pinggulDekat: 90, lututDekat: 90, pinggulJauh: 90, lututJauh: 90, torsoCondong: 2 },
+    )
+    expect(jalankan(isi).kesalahan.join(' ')).toMatch(/pusat massa jatuh/)
+  })
+
+  it('T6 single-leg RDL ditolak: kaki belakang MENJULUR, bukan menapak', () => {
+    const isi = aset(
+      { kontak: 'kaki', id: 'rdl' },
+      { pinggulDekat: 70, lututDekat: 20, pinggulJauh: -25, lututJauh: 5, torsoCondong: 2 },
+    )
+    expect(jalankan(isi).kesalahan.join(' ')).toMatch(/pusat massa jatuh/)
+  })
+
+  it('T7 pagar sudut dalam masih hidup tanpa izinDalam', () => {
+    const isi = aset({ kontak: 'kaki' }, { pinggulDekat: 130, lututDekat: 90, torsoCondong: 60 })
+    expect(jalankan(isi).kesalahan.join(' ')).toMatch(/butuh izinDalam/)
   })
 })

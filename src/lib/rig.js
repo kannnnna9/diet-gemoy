@@ -58,7 +58,7 @@ function sudutTelapakUntuk(keringAbs, tambat) {
 }
 
 // Forward kinematics + penambatan lantai untuk satu keyframe.
-// `kf`: 10 sendi + `akar`. `opts.kontak`: kaki|punggung|sisi|tangan-kaki|bahu-kaki|bebas.
+// `kf`: 10 sendi + `akar`. `opts.kontak`: kaki|punggung|sisi|tangan-kaki|merangkak|bahu-kaki|bebas.
 // `opts.tambat`: 'jari' opsional untuk jinjit.
 // `kf.akar.y`, `kf.kakiDekat`, `kf.kakiJauh` DIPAKSA DIABAIKAN (spec §4).
 export function hitungPose(kf, opts = {}) {
@@ -173,7 +173,10 @@ export function hitungPose(kf, opts = {}) {
   } else if (kontak === 'punggung' || kontak === 'sisi') {
     yTambat = rantai.leherBawah.y / 2 // titik tengah torso
     offsetKontak = STROKE.torso / 2
-  } else if (kontak === 'tangan-kaki') {
+  } else if (kontak === 'tangan-kaki' || kontak === 'merangkak') {
+    // `merangkak` (cat-cow, bird-dog) menambat sama seperti plank/push-up —
+    // yang membedakan hanya rentang torsoCondong di validator: merangkak boleh
+    // melengkung dua arah, plank harus tetap netral.
     yTambat = yTerendah(
       rantai['pergelanganTangan.dekat'], rantai['pergelanganTangan.jauh'],
       rantai['ankle.dekat'], rantai['ankle.jauh'],

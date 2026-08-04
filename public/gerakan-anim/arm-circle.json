@@ -1,0 +1,15 @@
+{
+  "id": "arm-circle",
+  "nama": "Arm circle",
+  "tampilan": "samping",
+  "durasiMs": 3000,
+  "putar": "loop",
+  "kontak": "kaki",
+  "keyframes": [
+    { "t": 0, "akar": { "x": 0, "rotasi": 0 }, "torsoCondong": 0, "leher": 0, "bahuDekat": 0, "sikuDekat": 5, "bahuJauh": 3, "sikuJauh": 8, "pinggulDekat": 0, "lututDekat": 0, "pinggulJauh": 2, "lututJauh": 2 },
+    { "t": 0.25, "akar": { "x": 0, "rotasi": 0 }, "torsoCondong": 0, "leher": 0, "bahuDekat": 90, "sikuDekat": 5, "bahuJauh": 87, "sikuJauh": 8, "pinggulDekat": 0, "lututDekat": 0, "pinggulJauh": 2, "lututJauh": 2 },
+    { "t": 0.5, "akar": { "x": 0, "rotasi": 0 }, "torsoCondong": 0, "leher": 0, "bahuDekat": 175, "sikuDekat": 5, "bahuJauh": 172, "sikuJauh": 8, "pinggulDekat": 0, "lututDekat": 0, "pinggulJauh": 2, "lututJauh": 2 },
+    { "t": 0.75, "akar": { "x": 0, "rotasi": 0 }, "torsoCondong": 0, "leher": 0, "bahuDekat": 90, "sikuDekat": 5, "bahuJauh": 93, "sikuJauh": 8, "pinggulDekat": 0, "lututDekat": 0, "pinggulJauh": 2, "lututJauh": 2 },
+    { "t": 1, "akar": { "x": 0, "rotasi": 0 }, "torsoCondong": 0, "leher": 0, "bahuDekat": 0, "sikuDekat": 5, "bahuJauh": 3, "sikuJauh": 8, "pinggulDekat": 0, "lututDekat": 0, "pinggulJauh": 2, "lututJauh": 2 }
+  ]
+}

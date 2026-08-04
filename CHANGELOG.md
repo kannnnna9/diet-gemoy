@@ -2,6 +2,26 @@
 
 Format mengikuti [Keep a Changelog](https://keepachangelog.com/) & [SemVer](https://semver.org/).
 
+## [1.4.0] — 2026-08-04
+
+### Ditambahkan
+- **5 animasi gerakan pemanasan**: `march`, `arm-circle`, `hip-circle`,
+  `hip-hinge`, `cat-cow`. Total aset animasi 3 → 8. Dihasilkan agent Perigel
+  (data sudut sendi murni angka), diverifikasi validator + tinjauan manual.
+- **Jenis kontak baru `merangkak`** untuk pose cat-cow & bird-dog. Penambatannya
+  sama dengan `tangan-kaki`, tapi `torsoCondong` boleh −40..90 karena melengkung
+  dua arah memang inti gerakannya. `tangan-kaki` (plank/push-up) TETAP ketat —
+  sengaja dipisah supaya pagar bentuk plank tidak ikut hilang.
+
+### Diperbaiki
+- **Aturan validator "pusat massa jatuh" tidak lagi salah tuduh pose bertumpu
+  satu kaki.** Sebelumnya setiap fleksi pinggul >30° dianggap pola squat dan
+  menuntut badan condong, sehingga marching di tempat ditolak — padahal kaki
+  tumpu yang menahan beban, badan memang tegak. Pembedanya kini apakah tungkai
+  satunya menapak TEGAK (pinggul 0–20°, lutut <20°), bukan berapa sisi yang
+  menekuk: single-leg RDL (tungkai belakang menjulur, pinggul negatif) TETAP
+  wajib condong dan tetap ditolak kalau tidak.
+
 ## [1.3.1] — 2026-08-04
 
 ### Diubah

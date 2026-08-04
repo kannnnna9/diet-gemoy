@@ -29,10 +29,11 @@ export const RENTANG_SENDI = {
 export const SENDI_NAMA = Object.keys(RENTANG_SENDI)
 
 // Pose berbaring (punggung/sisi/bahu-kaki): torsoCondong negatif besar sah
-// (panggul terangkat dari lantai), jadi rentang negatif diperdalam. Pose
-// berdiri (kaki) tetap ketat — badan menengadah ekstrem harus ditolak.
+// (panggul terangkat dari lantai), jadi rentang negatif diperdalam. `merangkak`
+// (cat-cow, bird-dog) ikut longgar — melengkung dua arah ITU gerakannya. Pose
+// berdiri (kaki) dan plank (tangan-kaki) tetap ketat.
 const TORSO_MIN_BERBARING = -40
-const KONTAK_BERBARING = new Set(['punggung', 'sisi', 'bahu-kaki'])
+const KONTAK_BERBARING = new Set(['punggung', 'sisi', 'bahu-kaki', 'merangkak'])
 
 export function rentangSendi(kontak, sendi) {
   const [min, max] = RENTANG_SENDI[sendi]
@@ -84,7 +85,16 @@ function ujiFisik(kf, kesalahan, { kontak = null, izinDalam = false, index = 0 }
   if (lututDekat > pinggulDekat + 10) {
     kesalahan.push(`lutut melewati ujung jari (lututDekat ${lututDekat} > pinggulDekat ${pinggulDekat} + 10)`)
   }
-  if (pinggulDekat > 30 && torsoCondong <= 10) {
+  // Bertumpu satu kaki (march, standing knee lift): tungkai satunya menapak
+  // TEGAK (pinggul 0..20, lutut < 20) sehingga menahan beban — badan tak perlu
+  // condong. Beda dari single-leg RDL, yang tungkai belakangnya MENJULUR
+  // (pinggul negatif) dan di situ torso memang wajib condong.
+  const tumpuTegak = (pinggul, lutut) => pinggul >= 0 && pinggul <= 20 && lutut < 20
+  const bertumpuSatuKaki =
+    (pinggulDekat > 30 && tumpuTegak(pinggulJauh, lututJauh)) ||
+    (pinggulJauh > 30 && tumpuTegak(pinggulDekat, lututDekat))
+
+  if (!bertumpuSatuKaki && pinggulDekat > 30 && torsoCondong <= 10) {
     kesalahan.push(`pusat massa jatuh: pinggulDekat ${pinggulDekat} > 30 tapi torsoCondong ${torsoCondong} <= 10`)
   }
   const pose = hitungPose(kf, { kontak: 'kaki' })
