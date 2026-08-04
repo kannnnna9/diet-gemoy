@@ -54,7 +54,7 @@ update public.profiles set pasangan_user_id = '<uid-istri>' where profil_id = 'p
 update public.profiles set pasangan_user_id = '<uid-suami>' where profil_id = 'ffazeyall';
 ```
 
-- **Status: MENUNGGU REZA** — butuh kedua orang login sekali agar `user_id` terisi, baru seed dijalankan.
+- **Status: SUDAH DILAKUKAN** (2026-07-31) — kedua akun sudah login, seed dijalankan, tautan pasangan aktif. Login + sync 2 HP terverifikasi lapangan.
 
 ## 6. `.env` lokal & variabel CI
 
