@@ -1,0 +1,14 @@
+{
+  "id": "plank",
+  "nama": "Plank",
+  "tampilan": "samping",
+  "durasiMs": 4000,
+  "putar": "pingpong",
+  "kontak": "tangan-kaki",
+  "keyframes": [
+    { "t": 0, "akar": { "x": 0, "rotasi": 90 }, "torsoCondong": 0, "leher": 4, "bahuDekat": 90, "sikuDekat": 90, "bahuJauh": 94, "sikuJauh": 94, "pinggulDekat": 2, "lututDekat": 0, "pinggulJauh": 4, "lututJauh": 2 },
+    { "t": 0.33, "akar": { "x": 0, "rotasi": 90 }, "torsoCondong": -1, "leher": 4, "bahuDekat": 89, "sikuDekat": 91, "bahuJauh": 93, "sikuJauh": 95, "pinggulDekat": 2, "lututDekat": 0, "pinggulJauh": 4, "lututJauh": 2 },
+    { "t": 0.67, "akar": { "x": 1, "rotasi": 90 }, "torsoCondong": -1, "leher": 4, "bahuDekat": 90, "sikuDekat": 90, "bahuJauh": 94, "sikuJauh": 94, "pinggulDekat": 3, "lututDekat": 1, "pinggulJauh": 5, "lututJauh": 3 },
+    { "t": 1, "akar": { "x": 0, "rotasi": 90 }, "torsoCondong": -2, "leher": 4, "bahuDekat": 89, "sikuDekat": 91, "bahuJauh": 93, "sikuJauh": 95, "pinggulDekat": 2, "lututDekat": 0, "pinggulJauh": 4, "lututJauh": 2 }
+  ]
+}

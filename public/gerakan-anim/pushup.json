@@ -1,0 +1,14 @@
+{
+  "id": "pushup",
+  "nama": "Push-up",
+  "tampilan": "samping",
+  "durasiMs": 3500,
+  "putar": "pingpong",
+  "kontak": "tangan-kaki",
+  "keyframes": [
+    { "t": 0, "akar": { "x": 0, "rotasi": 90 }, "torsoCondong": 0, "leher": 3, "bahuDekat": 88, "sikuDekat": 0, "bahuJauh": 92, "sikuJauh": 3, "pinggulDekat": 2, "lututDekat": 0, "pinggulJauh": 4, "lututJauh": 2 },
+    { "t": 0.35, "akar": { "x": 1, "rotasi": 90 }, "torsoCondong": 0, "leher": 3, "bahuDekat": 78, "sikuDekat": 35, "bahuJauh": 82, "sikuJauh": 38, "pinggulDekat": 2, "lututDekat": 0, "pinggulJauh": 4, "lututJauh": 2 },
+    { "t": 0.7, "akar": { "x": 2, "rotasi": 90 }, "torsoCondong": 0, "leher": 3, "bahuDekat": 68, "sikuDekat": 70, "bahuJauh": 72, "sikuJauh": 73, "pinggulDekat": 2, "lututDekat": 0, "pinggulJauh": 4, "lututJauh": 2 },
+    { "t": 1, "akar": { "x": 3, "rotasi": 90 }, "torsoCondong": 0, "leher": 3, "bahuDekat": 58, "sikuDekat": 95, "bahuJauh": 62, "sikuJauh": 98, "pinggulDekat": 2, "lututDekat": 0, "pinggulJauh": 4, "lututJauh": 2 }
+  ]
+}

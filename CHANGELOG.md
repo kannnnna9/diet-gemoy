@@ -2,6 +2,21 @@
 
 Format mengikuti [Keep a Changelog](https://keepachangelog.com/) & [SemVer](https://semver.org/).
 
+## [1.5.0] — 2026-08-05
+
+### Ditambahkan
+- **2 animasi gerakan**: `pushup`, `plank`. Total aset animasi 8 → 10.
+  Dihasilkan agent Perigel, lolos validator 10/10 + **uji visual mata langsung**.
+
+### Diperbaiki
+- **Proses produksi aset**: batch percontoh (5+9 aset) terbukti menyelamatkan 
+  dari produksi massal cacat. Validator 17/17 LOLOS angka, tapi pemeriksaan 
+  visual menemukan **hanya 5 dari 17 yang benar-benar terbaca** (`squat-kursi`, 
+  `march`, `pushup`, `plank`, `glute-bridge`). Temuan: **pose berbaring gagal 
+  terbaca** — figur diputar 90° jadi garis patah horizontal, mata tak bisa 
+  menyusun jadi sosok manusia. 12 aset gagal dihapus dari build. Produksi 
+  ditahan sampai pendekatan pose berbaring diputuskan.
+
 ## [1.4.0] — 2026-08-04
 
 ### Ditambahkan
